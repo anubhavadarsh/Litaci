@@ -1,0 +1,29 @@
+.VideoBg {
+  position: fixed;
+  width: 100vw;
+  overflow: hidden;
+
+  & > video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  & > .gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(0, 0, 0);
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 1) 18%,
+      rgba(39, 39, 39, 0.9316059187346813) 46%,
+      rgba(57, 57, 57, 0.7299252464657738) 66%,
+      rgba(73, 73, 73, 0.39098967223608194) 84%,
+      rgba(255, 255, 255, 0.02404289352459732) 93%
+    );
+  }
+  z-index: -100;
+}

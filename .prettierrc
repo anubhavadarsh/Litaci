@@ -1,0 +1,16 @@
+{
+  "semi": true,
+  "bracketSameLine": true,
+  "singleAttributePerLine": true,
+  "quoteProps": "as-needed",
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "overrides": [
+    {
+      "files": ["**/*.css", "**/*.scss", "**/*.html"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
+}

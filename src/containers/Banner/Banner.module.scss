@@ -1,0 +1,21 @@
+.banner {
+  font-family: var(--font-family-poppins-bold);
+  color: var(--color-text);
+  h1 {
+    font-size: 16vw;
+    letter-spacing: 2.5rem;
+    text-transform: uppercase;
+
+    span {
+      letter-spacing: 0;
+    }
+  }
+
+  h2 {
+    margin-top: 40px;
+    font-size: 1.2vw;
+    text-align: center;
+    letter-spacing: 0.2rem;
+    font-family: var(--font-family-poppins-Reg);
+  }
+}

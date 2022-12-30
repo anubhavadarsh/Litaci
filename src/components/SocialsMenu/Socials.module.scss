@@ -1,0 +1,45 @@
+.cont {
+  display: inline-block;
+  font-family: var(--font-family-noto-mono-bold);
+  font-size: 1rem;
+  > * {
+    display: inline-block;
+  }
+
+  ul {
+    padding: 0;
+  }
+
+  span.trig {
+    position: relative;
+    text-transform: uppercase;
+    background-color: var(--color-text);
+    color: var(--color-background);
+    padding: 5px 10px;
+    margin-right: 28px;
+
+    &::before {
+      content: "-";
+      color: var(--color-text);
+      font-weight: 400;
+      margin-right: 10px;
+      position: absolute;
+      right: -30px;
+    }
+  }
+
+  li {
+    margin: 6px 5px;
+    display: inline-block;
+    letter-spacing: 0.5px;
+  }
+}
+
+.btn {
+  color: var(--color-text);
+  transition: color 0.3s ease-in-out;
+
+  &:hover {
+    color: #808080;
+  }
+}
