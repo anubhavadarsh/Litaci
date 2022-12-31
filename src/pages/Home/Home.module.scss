@@ -6,29 +6,19 @@
     transform: rotate(-90deg) translateX(0);
     transform-origin: 0;
   }
+
+  .nav {
+    position: fixed;
+    right: 50px;
+    top: 20px;
+  }
 }
 
 .home {
   display: grid;
   place-items: center;
-  > .banner {
-    font-family: var(--font-family-poppins-bold);
-    color: var(--color-primary-dark);
-    h1 {
-      font-size: 16vw;
-      letter-spacing: 2.5rem;
-      text-transform: uppercase;
+}
 
-      span {
-        letter-spacing: 0;
-      }
-    }
-
-    h2 {
-      margin-top: 40px;
-      font-size: 1.2vw;
-      text-align: center;
-      letter-spacing: 0.2rem;
-    }
-  }
+.project {
+  background: url("../../assets/img/2998.jpg");
 }

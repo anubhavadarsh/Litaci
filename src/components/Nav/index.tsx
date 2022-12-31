@@ -1,68 +1,31 @@
-import Socials from 'components/SocialsMenu';
-import { Dispatch, FC, useEffect, useState, SetStateAction } from 'react';
-
+import clsx from 'clsx';
+import { FC } from 'react';
 import DarkModeToggle from './DarkModeToggle';
+
 import styles from './Nav.module.scss';
 
-const Nav: FC = () => {
-  const [expand, setExpand] = useState(false);
-
-  useEffect(() => {
-    if (expand) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [expand]);
-
-  return (
-    <>
-      <nav
-        className={styles.Navbar}
-        style={{ height: expand ? '100vh' : undefined }}>
-        <section>
-          <HamburgerMenu setExpand={setExpand} />
-        </section>
-        {expand && (
-          <section className={styles.extend}>
-            <div className={styles.dmtoggleCont}>
-              <DarkModeToggle />
-            </div>
-            <div>
-              <Socials />
-            </div>
-            <div>
-              <Watermark />
-            </div>
-          </section>
-        )}
-      </nav>
-    </>
-  );
-};
-
-interface HMProps {
-  setExpand: Dispatch<SetStateAction<boolean>>;
+interface props {
+  className?: string;
 }
 
-const HamburgerMenu: FC<HMProps> = ({ setExpand }) => {
-  const toggleHamMenu = () => {
-    setExpand((prev) => !prev);
-  };
+const Nav: FC<props> = ({ className: classProps }) => {
+  let newClasses = clsx(styles.cont, classProps);
 
   return (
-    <a
-      className={styles.hamMenu}
-      onClick={toggleHamMenu}>
-      <b></b>
-      <b></b>
-      <b></b>
-    </a>
+    <nav className={newClasses}>
+      <ul>
+        <li>
+          <a>explore</a>
+        </li>
+        <li>
+          <a>about</a>
+        </li>
+        <li>
+          <DarkModeToggle className={styles.dm} />
+        </li>
+      </ul>
+    </nav>
   );
-};
-
-const Watermark: FC = () => {
-  return <h2 className={styles.Watermark}>Made with 💗 by Litaci</h2>;
 };
 
 export default Nav;

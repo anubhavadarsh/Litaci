@@ -38,14 +38,12 @@ const SocialsMenu: FC<props> = ({ classname: classProps }) => {
       <span className={styles.trig}>follow</span>
       <ul>
         {socialList.map((c) => (
-          <li>
-            {
-              <SocialBtn
-                handle={c.handle}
-                link={c.link}
-                name={c.name}
-              />
-            }
+          <li key={c.name}>
+            <SocialBtn
+              handle={c.handle}
+              link={c.link}
+              name={c.name}
+            />
           </li>
         ))}
       </ul>

@@ -1,13 +1,18 @@
 import { FC, useContext } from 'react';
+import clsx from 'clsx';
 
 import { themeCtx } from 'context/theme-context';
 import styles from './DarkModeToggle.module.scss';
 
-const DarkModeToggle: FC = () => {
+interface props {
+  className?: string;
+}
+
+const DarkModeToggle: FC<props> = ({ className: classProps }) => {
   const tCtx = useContext(themeCtx);
 
   return (
-    <div className={styles.DMToggle}>
+    <label className={clsx(styles.cont, classProps)}>
       <input
         type='checkbox'
         name='darkMode'
@@ -15,10 +20,14 @@ const DarkModeToggle: FC = () => {
         onChange={tCtx.toggleDark}
         checked={tCtx.dark}
       />
-      <label htmlFor='darkMode'>
-        <span className={styles.btn}>{tCtx.dark ? '🌑' : '☀️'}</span>
-      </label>
-    </div>
+      <span
+        className={clsx(
+          'material-symbols-outlined',
+          tCtx.dark && styles.__active
+        )}>
+        light_mode
+      </span>
+    </label>
   );
 };
 

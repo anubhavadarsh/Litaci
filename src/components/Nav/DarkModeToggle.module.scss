@@ -1,6 +1,7 @@
-.DMToggle {
-  display: flex;
-  align-items: center;
+.cont {
+  display: grid;
+  place-items: center;
+  cursor: pointer;
 
   input[type="checkbox"] {
     height: 0;
@@ -8,44 +9,13 @@
     display: none;
   }
 
-  label {
-    $btn-w: 48px;
-    cursor: pointer;
-    width: $btn-w;
-    height: calc($btn-w / 2);
-    background: #fbfbfb;
-    border: 1px solid #e8eae9;
-    display: block;
-    border-radius: $btn-w;
-    position: relative;
+  overflow: hidden;
 
-    .btn {
-      display: flex;
-      align-items: center;
-      position: absolute;
-      top: 50%;
-      left: 10%;
-      transform: translateY(-50%);
-      background-color: transparent;
-      transition: 0.3s;
-
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    &:active > .btn {
-      width: calc($btn-w / 2);
-    }
+  span {
+    transition: transform 0.4s ease-in;
   }
 
-  input:checked + label {
-    background: #86d993;
-  }
-
-  input:checked + label .btn {
-    left: calc(100% - 3px);
-    transform: translateX(-100%) translateY(-50%);
+  span.__active {
+    transform: translateY(10px) rotate(90deg);
   }
 }

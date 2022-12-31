@@ -2,8 +2,9 @@
   font-family: var(--font-family-poppins-bold);
   color: var(--color-text);
   h1 {
-    font-size: 16vw;
-    letter-spacing: 2.5rem;
+    text-align: center;
+    font-size: 12vw;
+    letter-spacing: 1.75rem;
     text-transform: uppercase;
 
     span {
@@ -13,9 +14,8 @@
 
   h2 {
     margin-top: 40px;
-    font-size: 1.2vw;
+    font-size: 1.025vw;
     text-align: center;
     letter-spacing: 0.2rem;
-    font-family: var(--font-family-poppins-Reg);
   }
 }

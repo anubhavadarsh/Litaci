@@ -1,61 +1,27 @@
-.Navbar {
-  position: fixed;
-  background-color: var(--color-background);
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+.cont {
+  font-family: var(--font-family-noto-mono-bold);
+  font-size: 1.125rem;
 
-  section:first-child {
-    padding: 15px 30px;
-    height: 90px;
-    max-height: 90px;
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: space-between;
-  }
+  display: inline-block;
 
-  .extend {
-    overflow: auto;
-    div {
-      display: flex;
-      justify-content: center;
-    }
+  ul {
+    padding: 0;
+    list-style: none;
 
-    div.dmtoggleCont {
-      padding: 45px 0;
+    li {
+      display: inline-block;
+      margin: 6px 5px;
+      letter-spacing: 0.5px;
+
+      > * {
+        color: var(--color-text);
+
+        transition: color 0.3s ease-in-out;
+
+        &:hover {
+          color: #808080;
+        }
+      }
     }
   }
-
-  /* From https://css.glass */
-  background: rgba(255, 255, 255, 0);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
-
-.hamMenu {
-  display: block;
-  $bar-w: 24px;
-  $bar-h: 1.5px;
-  $bar-color: var(--color-foreground);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  width: $bar-w;
-  height: calc(($bar-w * 3) / 5);
-  cursor: pointer;
-
-  b {
-    height: $bar-h;
-    background-color: $bar-color;
-  }
-}
-
-.Watermark {
-  font-family: var(--font-family-noto-mono-light);
-  color: var(--color-foreground);
-  font-size: 0.9rem;
-  padding-top: 45px;
 }
