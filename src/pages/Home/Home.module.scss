@@ -1,4 +1,6 @@
 .wrapper {
+  scroll-snap-type: y mandatory;
+
   .socialMenu {
     position: fixed;
     top: calc(90vh + 40px);
@@ -15,10 +17,8 @@
 }
 
 .home {
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
   display: grid;
   place-items: center;
-}
-
-.project {
-  background: url("../../assets/img/2998.jpg");
 }
