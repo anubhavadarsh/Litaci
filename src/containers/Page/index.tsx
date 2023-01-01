@@ -1,15 +1,26 @@
-import { FC, ReactNode } from 'react';
+import { FC, forwardRef, ReactNode } from 'react';
+import { motion, HTMLMotionProps } from 'framer-motion';
 import clsx from 'clsx';
 
 import styles from './Page.module.scss';
 
 interface Props {
+  motionProps?: HTMLMotionProps<'div'>;
   children: ReactNode;
   className?: string;
 }
 
-const Page: FC<Props> = ({ children, className }) => {
-  return <div className={clsx(styles.Page, className)}>{children}</div>;
-};
+const Page: FC<Props> = forwardRef<HTMLDivElement, Props>(
+  ({ motionProps, className, children }, ref) => {
+    return (
+      <motion.div
+        {...motionProps}
+        className={clsx(styles.Page, className)}
+        ref={ref}>
+        {children}
+      </motion.div>
+    );
+  }
+);
 
 export default Page;
