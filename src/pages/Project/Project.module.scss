@@ -1,0 +1,63 @@
+.cont {
+  background: url("../../assets/img/2998.jpg");
+  position: relative;
+
+  > .viewWrap {
+    height: inherit;
+    width: 100%;
+    position: absolute;
+    overflow-y: scroll;
+
+    > div {
+      width: 100%;
+      padding: 5% 10% 0% 10%;
+      position: absolute;
+    }
+  }
+}
+
+.projectArticle {
+  display: flex;
+  margin-bottom: 10rem;
+  position: relative;
+
+  & > .projItem {
+    & > .imgCont {
+      max-width: 35vw;
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  &:nth-of-type(6n + 1) {
+    justify-content: start;
+  }
+
+  &:nth-of-type(3n + 2) {
+    padding-right: 6%;
+    padding-left: 4%;
+  }
+
+  &:nth-of-type(3n + 3) {
+    padding-right: 4%;
+    padding-left: 6%;
+  }
+
+  &:nth-of-type(3n + 2),
+  &:nth-of-type(3n + 3) {
+    display: inline-block;
+    max-width: 50%;
+    vertical-align: top;
+  }
+
+  &:nth-of-type(6n + 2) {
+    margin-top: 55px;
+  }
+
+  &:nth-of-type(6n + 4) {
+    justify-content: flex-end;
+  }
+}

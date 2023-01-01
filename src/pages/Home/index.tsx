@@ -1,8 +1,8 @@
 import { FC } from 'react';
-import clsx from 'clsx';
 
 import Page from 'containers/Page';
 import Banner from 'containers/Banner';
+import ProjectPage from 'pages/Project';
 import SplitSection from 'components/SplitSection';
 import SocialsMenu from 'components/SocialsMenu';
 import Nav from 'components/Nav';
@@ -22,12 +22,10 @@ const Home: FC = () => {
             Designer.
           </Banner>
         </Page>
-        <Page className={clsx(styles.home, styles.project)}>
-          <Banner
-            main='project'
-            className={styles.banner}
-          />
-        </Page>
+        <ProjectPage
+          bannerStyles={styles.banner}
+          className={styles.home}
+        />
         <Page className={styles.home}>
           <SplitSection />
         </Page>
