@@ -10,7 +10,7 @@ interface Props {
   className?: string;
 }
 
-const Page: FC<Props> = forwardRef<HTMLDivElement, Props>(
+const Page = forwardRef<HTMLDivElement, Props>(
   ({ motionProps, className, children }, ref) => {
     return (
       <motion.div
