@@ -7,12 +7,12 @@ import Banner from 'containers/Banner';
 import styles from './Project.module.scss';
 import { list } from './projectList';
 
-interface IProps {
-  bannerStyles: string;
+export interface IPageProps {
+  bannerStyles?: string;
   className?: string;
 }
 
-const Project: FC<IProps> = ({ className: classProps, bannerStyles }) => {
+const Project: FC<IPageProps> = ({ className: classProps, bannerStyles }) => {
   const newClasses = clsx(classProps, styles.cont);
 
   return (

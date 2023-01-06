@@ -39,9 +39,9 @@
 
 .btn {
   color: var(--color-text);
-  transition: color 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 
   &:hover {
-    color: #808080;
+    opacity: var(--opacity-common);
   }
 }
