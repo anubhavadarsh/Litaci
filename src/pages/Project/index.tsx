@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
 
 import Page from 'containers/Page';
 import Banner from 'containers/Banner';
@@ -16,22 +15,24 @@ const Project: FC<IPageProps> = ({ className: classProps, bannerStyles }) => {
   const newClasses = clsx(classProps, styles.cont);
 
   return (
-    <Page className={newClasses}>
-      <Banner
-        main='project'
-        className={clsx(bannerStyles)}
-      />
+    <>
+      <Page className={newClasses}>
+        <Banner
+          main='project'
+          className={clsx(bannerStyles)}
+        />
+      </Page>
       <div className={styles.viewWrap}>
-        <motion.div>
+        <div>
           {list.map((i, index) => (
             <PortArticle
               imgSrc={i.img}
               key={index}
             />
           ))}
-        </motion.div>
+        </div>
       </div>
-    </Page>
+    </>
   );
 };
 

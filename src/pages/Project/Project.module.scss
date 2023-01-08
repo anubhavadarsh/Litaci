@@ -1,19 +1,16 @@
 .cont {
   background: url("../../assets/img/2998.jpg");
-  position: relative;
+  position: sticky;
+  top: 0;
+  // left: 0;
+  // right: 0;
+  bottom: 0;
+  z-index: -1;
+}
 
-  > .viewWrap {
-    transform: translateX(100%);
-    height: inherit;
-    width: 100%;
-    position: absolute;
-    overflow-y: scroll;
-
-    > div {
-      width: 100%;
-      padding: 5% 10% 0% 10%;
-      position: absolute;
-    }
+.viewWrap {
+  > div {
+    padding: 5% 10% 0% 10%;
   }
 }
 
