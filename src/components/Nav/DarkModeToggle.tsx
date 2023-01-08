@@ -1,6 +1,12 @@
 import { FC, useContext } from 'react';
 import clsx from 'clsx';
-import { motion, useTime, useTransform } from 'framer-motion';
+import {
+  AnimatePresence,
+  motion,
+  useTime,
+  useTransform,
+  Variants,
+} from 'framer-motion';
 
 import { themeCtx } from 'context/theme-context';
 import styles from './DarkModeToggle.module.scss';
@@ -12,14 +18,6 @@ interface props {
 const DarkModeToggle: FC<props> = ({ className: classProps }) => {
   const tCtx = useContext(themeCtx);
 
-  const time = useTime();
-  const rotate = useTransform(
-    time,
-    [0, 4000], // For every 4 seconds...
-    [0, 360], // ...rotate 360deg
-    { clamp: false }
-  );
-
   return (
     <label className={clsx(styles.cont, classProps)}>
       <input
@@ -29,13 +27,24 @@ const DarkModeToggle: FC<props> = ({ className: classProps }) => {
         onChange={tCtx.toggleDark}
         checked={tCtx.dark}
       />
+      <AnimatePresence>
+        {tCtx.dark && (
+          <motion.span
+            className={clsx('material-symbols-outlined', styles.cloud)}
+            initial={{ x: '100%' }}
+            animate={{ x: 5 }}
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.5 }}>
+            cloud
+          </motion.span>
+        )}
+      </AnimatePresence>
       <motion.span
         variants={variants}
         animate={tCtx.dark ? 'dark' : 'light'}
         transition={{
           duration: 0.5,
         }}
-        style={{ rotate }}
         className={clsx('material-symbols-outlined')}>
         light_mode
       </motion.span>
@@ -43,12 +52,13 @@ const DarkModeToggle: FC<props> = ({ className: classProps }) => {
   );
 };
 
-const variants = {
-  light: {
-    y: '10px',
-  },
+const variants: Variants = {
   dark: {
+    y: '5px',
+  },
+  light: {
     y: 0,
+    rotate: '-45deg',
   },
 };
 

@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { motion, Variants } from 'framer-motion';
 import clsx from 'clsx';
 
 import Page from 'containers/Page';
@@ -42,17 +43,34 @@ interface IPAProps {
 
 const PortArticle: FC<IPAProps> = ({ imgSrc }) => {
   return (
-    <article className={styles.projectArticle}>
-      <div className={styles.projItem}>
-        <div className={styles.imgCont}>
-          <img
-            src={imgSrc}
-            alt='test'
-          />
-        </div>
-      </div>
-    </article>
+    <motion.article
+      className={styles.projectArticle}
+      initial='offscreen'
+      whileInView='onscreen'
+      viewport={{ once: true, amount: 0.8 }}>
+      <motion.div
+        className={styles.imgCont}
+        variants={portVariants}>
+        <img
+          src={imgSrc}
+          alt='test'
+        />
+      </motion.div>
+    </motion.article>
   );
+};
+
+const portVariants: Variants = {
+  offscreen: {
+    y: '100%',
+  },
+  onscreen: {
+    y: 0,
+    transition: {
+      type: 'tween',
+      duration: 1,
+    },
+  },
 };
 
 export default Project;

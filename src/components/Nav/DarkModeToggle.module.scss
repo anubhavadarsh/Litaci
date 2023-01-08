@@ -2,6 +2,7 @@
   display: grid;
   place-items: center;
   cursor: pointer;
+  position: relative;
 
   input[type="checkbox"] {
     height: 0;
@@ -10,4 +11,15 @@
   }
 
   overflow: hidden;
+
+  .cloud {
+    position: absolute;
+    font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
+    font-size: 16px;
+    bottom: -3px;
+  }
+
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

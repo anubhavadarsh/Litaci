@@ -1,5 +1,4 @@
 .cont {
-  background: url("../../assets/img/2998.jpg");
   position: sticky;
   top: 0;
   // left: 0;
@@ -15,18 +14,17 @@
 }
 
 .projectArticle {
+  overflow: hidden;
   display: flex;
   margin-bottom: 10rem;
   position: relative;
 
-  & > .projItem {
-    & > .imgCont {
-      max-width: 35vw;
+  & .imgCont {
+    max-width: 35vw;
 
-      img {
-        max-width: 100%;
-        height: auto;
-      }
+    img {
+      max-width: 100%;
+      height: auto;
     }
   }
 
