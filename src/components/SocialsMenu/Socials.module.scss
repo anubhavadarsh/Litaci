@@ -1,4 +1,10 @@
 .cont {
+  position: fixed;
+  top: calc(90vh + 40px);
+  left: 50px;
+  transform: rotate(-90deg) translateX(0);
+  transform-origin: 0;
+
   display: inline-block;
   font-family: var(--font-family-noto-mono-bold);
   font-size: 1.125rem;

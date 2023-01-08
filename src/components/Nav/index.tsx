@@ -1,7 +1,8 @@
-import clsx from 'clsx';
 import { FC } from 'react';
-import DarkModeToggle from './DarkModeToggle';
+import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 
+import DarkModeToggle from './DarkModeToggle';
 import styles from './Nav.module.scss';
 
 interface props {
@@ -15,10 +16,10 @@ const Nav: FC<props> = ({ className: classProps }) => {
     <nav className={newClasses}>
       <ul>
         <li>
-          <a>explore</a>
+          <Link to='/'>explore</Link>
         </li>
         <li>
-          <a>about</a>
+          <Link to='about'>about</Link>
         </li>
         <li>
           <DarkModeToggle className={styles.dm} />
