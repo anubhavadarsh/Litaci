@@ -1,65 +1,73 @@
-import { FC, useState } from 'react';
+import { FC, ReactNode } from 'react';
+import { AnimatePresence, LayoutGroup, motion } from 'framer-motion';
 import clsx from 'clsx';
 
-import Banner from 'containers/Banner';
 import styles from './SplitSection.module.scss';
 
-const companies = [
-  {
-    name: 'Bright Money',
-    src: '',
-  },
-  {
-    name: 'Merakii',
-    src: '',
-  },
-  {
-    name: 'Founders Lab',
-    src: '',
-  },
-  {
-    name: 'Innovatyv',
-    src: '',
-  },
-];
+interface IProps {
+  company: string;
+  isOpen: boolean;
+  closeSection: () => void;
+  children?: ReactNode;
+}
 
-const SplitSection = () => {
-  const [company, setCompany] = useState(-1);
-
-  const handleSplit = () => {
-    setCompany(-1);
-  };
-
-  const handleClick = (index: number) => {
-    setCompany(index);
-  };
-
+const SplitSection: FC<IProps> = ({
+  isOpen,
+  company,
+  closeSection,
+  children,
+}) => {
   return (
-    <div className={styles.main}>
-      <section
-        className={clsx(company != -1 && styles.__split)}
-        onClick={handleSplit}>
-        <Banner
-          main='work'
-          className={styles.banner}>
-          {companies.map((c, i) => {
-            return (
-              <a
-                key={i}
-                className={clsx(company == i && styles.__active)}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  handleClick(i);
-                }}>
-                {c.name}
-              </a>
-            );
-          })}
-        </Banner>
-      </section>
-      <section>{company != -1 ? companies[company].name : null}</section>
+    <div className={clsx(styles.main, isOpen && styles.__split)}>
+      <LayoutGroup>
+        <motion.section
+          onClick={closeSection}
+          layout
+          style={{
+            width: isOpen ? '50%' : '100%',
+          }}
+          transition={{
+            type: 'tween',
+            duration: 0.5,
+          }}>
+          {children}
+        </motion.section>
+        <AnimatePresence>
+          {isOpen && (
+            <motion.section
+              variants={overlay}
+              initial='initial'
+              animate='animate'
+              exit='exit'>
+              {company}
+            </motion.section>
+          )}
+        </AnimatePresence>
+      </LayoutGroup>
     </div>
   );
+};
+
+const overlay = {
+  initial: {
+    x: '100vw',
+    opacity: 0,
+  },
+  animate: {
+    x: '50vw',
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      type: 'tween',
+    },
+  },
+  exit: {
+    x: '100vw',
+    opacity: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
 };
 
 export default SplitSection;

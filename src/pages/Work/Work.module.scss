@@ -1,0 +1,42 @@
+.banner {
+  a {
+    padding-bottom: 10px;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 20px;
+    position: relative;
+
+    &:last-of-type {
+      margin: 0;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      display: block;
+      background: none repeat scroll 0 0 transparent;
+      bottom: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--color-text);
+      transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    }
+
+    &:hover::after,
+    &.__active::after {
+      width: 100% !important; //TODO fix this styling!
+      left: 0 !important;
+    }
+  }
+
+  &.__split {
+    h1 {
+      font-size: 5vw;
+    }
+
+    h2 {
+      font-size: 0.7vw;
+    }
+  }
+}
