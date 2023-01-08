@@ -1,4 +1,6 @@
 .wrapper {
+  overflow-y: scroll;
+
   .socialMenu {
     position: fixed;
     top: calc(90vh + 40px);
@@ -15,9 +17,10 @@
 }
 
 .home {
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
+  // scroll-snap-align: center; //TODO: snap settings
+  // scroll-snap-stop: always;
   overflow-x: hidden;
   display: grid;
   place-items: center;
+  background-color: var(--color-background);
 }
