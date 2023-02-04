@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
 
 import { router } from 'router';
-import App from './App';
 import 'normalize.css';
 import 'styles/main.scss';
 

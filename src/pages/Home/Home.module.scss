@@ -1,19 +1,5 @@
 .wrapper {
   overflow-y: scroll;
-
-  .socialMenu {
-    position: fixed;
-    top: calc(90vh + 40px);
-    left: 50px;
-    transform: rotate(-90deg) translateX(0);
-    transform-origin: 0;
-  }
-
-  .nav {
-    position: fixed;
-    right: 50px;
-    top: 20px;
-  }
 }
 
 .home {
@@ -23,4 +9,9 @@
   display: grid;
   place-items: center;
   background-color: var(--color-background);
+
+  h1 {
+    color: transparent;
+    -webkit-text-stroke: 0.2rem var(--color-text);
+  }
 }

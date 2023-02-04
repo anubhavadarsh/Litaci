@@ -1,0 +1,51 @@
+.about {
+  overflow-x: hidden;
+  display: grid;
+  place-items: center;
+  background-color: var(--color-background);
+
+  position: relative;
+
+  .banner {
+    position: fixed;
+
+    &.bannerBottom {
+      h1 {
+        color: var(--color-text);
+      }
+    }
+
+    &.bannerTop {
+      h1 {
+        color: transparent;
+        -webkit-text-stroke: 0.2rem var(--color-text);
+      }
+    }
+  }
+
+  .content {
+    // width: 100%;
+    // position: relative;
+  }
+}
+
+.card {
+  position: absolute;
+  height: 80%;
+  background-color: burlywood;
+  padding: 1rem;
+  width: 80%;
+  max-width: 35rem;
+  font-family: var(--font-family-poppins-Reg);
+
+  &.left {
+    left: 10%;
+    top: 2%;
+
+    p {
+      font-size: 1rem;
+      color: var(--color-text);
+      line-height: 2rem;
+    }
+  }
+}
