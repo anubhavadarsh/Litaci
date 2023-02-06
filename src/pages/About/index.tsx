@@ -11,50 +11,48 @@ const AboutPage: FC = () => {
     <Page className={styles.about}>
       <Banner
         main='About'
-        className={clsx(styles.banner, styles.bannerBottom)}
+        className={styles.banner}
       />
       <div className={styles.content}>
-        <div className={clsx(styles.card, styles.first)}>
-          <img
-            src='https://media.giphy.com/media/jQEg497ODi2J8nggZI/giphy.gif'
-            alt=''
-          />
+        <div className={styles.child}>
+          <div className={styles.textContainer}>
+            <p className={clsx(styles.text, styles.greet)}>
+              I'm a web developer based in India with a passion for creating
+              stunning, user-friendly websites. I love taking complex problems
+              and turning them into simple, elegant solutions.
+            </p>
+            <p className={styles.text}>
+              When I'm not coding, you can find me binge-watching shows on
+              Netflix, or playing video games.
+            </p>
+          </div>
+          <div className={styles.imageContainer}>
+            <img
+              src='https://media.giphy.com/media/N3rfcp89yDb7zZJ6A5/giphy.gif'
+              alt=''
+            />
+          </div>
         </div>
-        <div className={styles['first-text']}>
-          <p>
-            I'm a web developer based in India with a passion for creating
-            stunning, user-friendly websites. I love taking complex problems and
-            turning them into simple, elegant solutions.
-          </p>
-          <p>
-            When I'm not coding, you can find me binge-watching shows on
-            Netflix, or playing video games.
-          </p>
+        <div className={styles.child}>
+          <div className={styles.textContainer}>
+            <p className={styles.text}>
+              I'm a firm believer in the power of a good cup of chai (or coffee,
+              if that's your thing) to get the creative juices flowing.
+            </p>
+            <p className={styles.text}>
+              I approach each project with a professional yet light-hearted
+              attitude, because let's be real, coding can get a little boring
+              without some humor.
+            </p>
+          </div>
+          <div className={styles.imageContainer}>
+            <img
+              src='https://media.giphy.com/media/cOSbH8NoUFt9MXbuie/giphy.gif'
+              alt=''
+            />
+          </div>
         </div>
-        <div className={clsx(styles.card, styles.second)}>
-          <img
-            src='https://media.giphy.com/media/2w5gnM5izNAw8FFcXx/giphy.gif'
-            alt=''
-          />
-        </div>
-        <div className={styles['second-text']}>
-          <p>
-            I'm a firm believer in the power of a good cup of chai (or coffee,
-            if that's your thing) to get the creative juices flowing. Whether
-            I'm working on a new project or debugging a stubborn line of code, I
-            approach each challenge with enthusiasm and a can-do attitude.
-          </p>
-        </div>
-        {/* <div>
-          <p>
-            If you're looking for a web developer who's passionate,
-            knowledgeable, and always up for a good laugh, look no further!
-            <br />
-            Let's work together to bring your next project to life or just say
-            hello. Enjoy your stay.
-          </p>
-        </div> */}
-        <div className={styles['layer-parent']}>
+        <div className={styles.child}>
           <div className={styles.layer}>
             <h2>contact</h2>
             <p>
@@ -66,10 +64,6 @@ const AboutPage: FC = () => {
           </div>
         </div>
       </div>
-      <Banner
-        main='About'
-        className={clsx(styles.banner, styles.bannerTop)}
-      />
     </Page>
   );
 };
