@@ -1,0 +1,19 @@
+@use "sass:map";
+
+$breakpoints: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+  2xl: 1536px,
+);
+
+@mixin media-breakpoint-down($screen) {
+  @if map.has-key($breakpoints, $screen) {
+    @media screen and (min-width: map-get($breakpoints, $screen)) {
+      @content;
+    }
+  } @else {
+    @warn "Unknown breakpoint: #{$screen}.";
+  }
+}

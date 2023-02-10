@@ -1,45 +1,78 @@
+@import "../../styles/mixins/breakpoints";
+
 .cont {
   position: fixed;
-  top: calc(90vh + 40px);
-  left: 50px;
-  transform: rotate(-90deg) translateX(0);
-  transform-origin: 0;
 
   display: inline-block;
   font-family: var(--font-family-noto-mono-bold);
-  font-size: 1.125rem;
-
+  font-size: 1rem;
   z-index: var(--zindex-common);
-  > * {
-    display: inline-block;
-  }
+  letter-spacing: 0.5px;
 
-  ul {
+  > * {
     padding: 0;
   }
 
-  span.trig {
-    position: relative;
-    text-transform: uppercase;
+  ul {
     background-color: var(--color-text);
     color: var(--color-background);
-    padding: 5px 10px;
-    margin-right: 28px;
+    border-radius: 5px;
+    width: 95vw;
+    height: 40px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    list-style: none;
 
-    &::before {
-      content: "-";
-      color: var(--color-text);
-      font-weight: 400;
-      margin-right: 10px;
-      position: absolute;
-      right: -30px;
+    li {
+      margin: 0 10px;
+      color: inherit;
+      a {
+        color: inherit;
+      }
     }
   }
 
-  li {
-    margin: 6px 5px;
-    display: inline-block;
-    letter-spacing: 0.5px;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  span.tag {
+    display: none;
+  }
+
+  @include media-breakpoint-down(md) {
+    top: calc(90vh + 40px);
+    left: 50px;
+    transform: rotate(-90deg) translateX(0);
+    transform-origin: 0;
+
+    ul {
+      background-color: transparent;
+      color: var(--color-text);
+      border-radius: 5px;
+      width: auto;
+      display: inline-flex;
+    }
+
+    span.tag {
+      display: inline-block;
+      position: relative;
+      text-transform: uppercase;
+      background-color: var(--color-text);
+      color: var(--color-background);
+      padding: 5px 10px;
+      margin-right: 28px;
+
+      &::before {
+        content: "-";
+        color: var(--color-text);
+        font-weight: 400;
+        margin-right: 10px;
+        position: absolute;
+        right: -30px;
+      }
+    }
   }
 }
 

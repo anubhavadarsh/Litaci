@@ -35,7 +35,7 @@ const SocialsMenu: FC<props> = ({ classname: classProps }) => {
 
   return (
     <div className={newClasses}>
-      <span className={styles.trig}>follow</span>
+      <span className={styles.tag}>follow</span>
       <ul>
         {socialList.map((c) => (
           <li key={c.name}>
