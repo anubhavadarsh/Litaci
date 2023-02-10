@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+
+@font-face {
+  font-family: NotoMonoLight;
+  src: url(./fonts/Noto_Sans_Mono/NotoSansMono-Light.ttf) format("truetype");
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: NotoMonoReg;
+  src: url(./fonts/Noto_Sans_Mono/NotoSansMono-Regular.ttf) format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: NotoMonoBold;
+  src: url(./fonts/Noto_Sans_Mono/NotoSansMono-Bold.ttf) format("truetype");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: PoppinsLight;
+  src: url(./fonts/Poppins/Poppins-Thin.ttf) format("truetype");
+  font-weight: 100;
+}
+
+@font-face {
+  font-family: PoppinsReg;
+  src: url(./fonts/Poppins/Poppins-Regular.ttf) format("truetype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: PoppinsBold;
+  src: url(./fonts/Poppins/Poppins-Bold.ttf) format("truetype");
+  font-weight: 700;
+}
+
+:root {
+  --font-family-noto-mono-light: NotoMonoLight, sans-serif;
+  --font-family-noto-mono-Reg: NotoMonoReg, sans-serif;
+  --font-family-noto-mono-bold: NotoMonoBold, sans-serif;
+  --font-family-poppins-light: PoppinsLight, sans-serif;
+  --font-family-poppins-Reg: PoppinsReg, sans-serif;
+  --font-family-poppins-bold: PoppinsBold, sans-serif;
+}
