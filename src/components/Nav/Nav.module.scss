@@ -1,7 +1,7 @@
+@import "../../styles/mixins/breakpoints";
+
 .cont {
   position: fixed;
-  right: 50px;
-  top: 20px;
 
   font-family: var(--font-family-noto-mono-bold);
   font-size: 1.125rem;
@@ -9,6 +9,14 @@
   display: inline-block;
 
   z-index: var(--zindex-common);
+
+  top: 10px;
+  right: 10px;
+
+  @include media-breakpoint-down(md) {
+    right: 50px;
+    top: 20px;
+  }
 
   ul {
     padding: 0;
@@ -28,6 +36,11 @@
         &:hover {
           opacity: var(--opacity-common);
         }
+      }
+
+      & > *.active {
+        padding-bottom: 5px;
+        border-bottom: 2px solid var(--color-text);
       }
     }
   }

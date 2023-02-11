@@ -3,7 +3,7 @@ import { FC } from 'react';
 
 import styles from './Socials.module.scss';
 
-const socialList: Social[] = [
+export const socialList: Social[] = [
   {
     name: 'twitter',
     link: 'https://www.twitter.com/',
