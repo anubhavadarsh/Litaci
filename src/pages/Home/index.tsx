@@ -16,6 +16,23 @@ const Home: FC = () => {
 
   useLayoutEffect(() => {
     const handleResize = (e: UIEvent | null) => {
+      console.log(window.innerWidth);
+
+      if (window.innerWidth < 768) {
+        setFontSize(58);
+        return;
+      }
+
+      if (window.innerWidth < 1024) {
+        setFontSize(112);
+        return;
+      }
+
+      if (window.innerWidth < 1280) {
+        setFontSize(152);
+        return;
+      }
+
       const children = heroRef.current?.children;
       if (children) {
         const height = children[0].clientHeight;
