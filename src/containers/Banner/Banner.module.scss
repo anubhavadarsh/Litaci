@@ -1,11 +1,16 @@
+@use "sass:map";
+@import "../../styles/mixins/breakpoints";
+
 .banner {
   user-select: none;
-  font-family: var(--font-family-poppins-bold);
   color: var(--color-text);
+  font-family: var(--font-family-poppins-bold);
+
+  padding: 0 1rem;
+
   h1 {
-    text-align: center;
-    font-size: 12vw;
-    letter-spacing: 1.75rem;
+    font-size: 15vw;
+    letter-spacing: 0.5rem;
     text-transform: uppercase;
 
     span {
@@ -14,9 +19,25 @@
   }
 
   h2 {
-    margin-top: 40px;
-    font-size: 1.025vw;
-    text-align: center;
-    letter-spacing: 0.2rem;
+    margin-top: 20px;
+    font-family: var(--font-family-poppins-Reg);
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+  }
+
+  @include media-breakpoint-down(md) {
+    margin: 0 15%;
+
+    h1 {
+      letter-spacing: 1.75rem;
+      font-size: 12vw;
+    }
+    h2 {
+      font-family: var(--font-family-poppins-Reg);
+      max-width: map.get($breakpoints, lg);
+      margin-top: 40px;
+      font-size: 1.85rem;
+      line-height: 2.8rem;
+    }
   }
 }
