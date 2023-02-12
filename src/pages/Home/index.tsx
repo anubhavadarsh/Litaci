@@ -1,19 +1,64 @@
-import { FC } from 'react';
+import { FC, useLayoutEffect, useState, useRef, useContext } from 'react';
+import { themeCtx } from 'context/theme-context';
 import clsx from 'clsx';
 
 import Page from 'containers/Page';
-import Banner from 'containers/Banner';
 import ProjectPage from 'pages/Project';
 import WorkPage from 'pages/Work';
 import styles from './Home.module.scss';
+import heroImageDark from 'assets/img/hero-dark.jpg';
 
 const Home: FC = () => {
+  const [fontSize, setFontSize] = useState(16);
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  const ctx = useContext(themeCtx);
+
+  useLayoutEffect(() => {
+    const handleResize = (e: UIEvent | null) => {
+      const children = heroRef.current?.children;
+      if (children) {
+        const height = children[0].clientHeight;
+
+        setFontSize(height <= 187 ? height : 187);
+      }
+    };
+
+    handleResize(null);
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const displayP = (text: string) => {
+    return (
+      <p
+        style={{
+          fontSize: `${fontSize}px`,
+          lineHeight: `${fontSize}px`,
+        }}>
+        {text}
+      </p>
+    );
+  };
+
   return (
     <Page className={styles.wrapper}>
       <Page className={clsx(styles.home, styles.salute)}>
-        <Banner main='hello'>
-          I'm Anubhav Adarsh. Software Developer, Engineer and Product Designer.
-        </Banner>
+        <section
+          className={styles.hero}
+          style={{
+            backgroundImage: !ctx.dark ? `url(${heroImageDark})` : undefined,
+          }}
+          ref={heroRef}>
+          <div className={styles.hero__content}>{displayP('Anubhav')}</div>
+          <div className={styles.hero__content}>{displayP('Adarsh')}</div>
+          <div className={styles.hero__content}>{displayP('Software')}</div>
+          <div className={styles.hero__content}>{displayP('Developer')}</div>
+        </section>
       </Page>
       <ProjectPage className={styles.home} />
       <WorkPage className={styles.home} />

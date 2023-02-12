@@ -3,7 +3,7 @@ import React, { FC, ReactNode, useEffect, useState } from 'react';
 import { IThemeContext } from 'types/theme';
 
 const initialState = {
-  dark: false,
+  dark: true,
 };
 
 const themeCtx = React.createContext<IThemeContext>(initialState);
