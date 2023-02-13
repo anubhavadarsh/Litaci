@@ -21,6 +21,10 @@
     background: center / cover no-repeat
       url("https://media.giphy.com/media/T5tnw3xsSagXhUrSKD/giphy.gif");
 
+    &.bgDark {
+      filter: invert(1);
+    }
+
     & .content {
       display: flex;
       flex-direction: column;

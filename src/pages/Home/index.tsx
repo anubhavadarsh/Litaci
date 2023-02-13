@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import clsx from 'clsx';
 
 import Page from 'containers/Page';
 import ProjectPage from 'pages/Project';
 import WorkPage from 'pages/Work';
 import styles from './Home.module.scss';
+import { themeCtx } from 'context/theme-context';
 
 const Home: FC = () => {
   return (
@@ -17,9 +18,11 @@ const Home: FC = () => {
 };
 
 const LandingPage: FC = () => {
+  const ctx = useContext(themeCtx);
+
   return (
-    <Page className={clsx(styles.home)}>
-      <div className={styles.cover}>
+    <Page className={styles.home}>
+      <div className={clsx(styles.cover, !ctx.dark && styles.bgDark)}>
         <div className={styles.content}>
           <h2>Software</h2>
           <h2>Developer</h2>
