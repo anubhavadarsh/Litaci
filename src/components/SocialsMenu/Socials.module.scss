@@ -43,7 +43,7 @@
 
   @include media-breakpoint-down(md) {
     top: calc(90vh + 40px);
-    left: 50px;
+    left: 30px;
     transform: rotate(-90deg) translateX(0);
     transform-origin: 0;
 
