@@ -13,7 +13,15 @@ const AboutPage: FC = () => {
 
   return (
     <Page className={styles.about}>
-      <div className={clsx(styles.cover, !ctx.dark && styles.bgDark)}>
+      <div className={styles.cover}>
+        <div
+          className={clsx(
+            styles.backdrop,
+            styles.background,
+            !ctx.dark && styles.bgDark
+          )}
+        />
+        <div className={clsx(styles.backdrop, styles.gradient)} />
         <Banner
           main='About'
           className={styles.banner}
@@ -61,7 +69,7 @@ const Links: FC = () => {
       {socialList.map(({ handle, link, name }) => {
         return (
           <span
-            className={clsx(styles.link, styles[name])}
+            className={styles.link}
             key={name}>
             <a href={`${link}${handle}`}>{getIcon(name)}</a>
           </span>
