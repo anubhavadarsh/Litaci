@@ -7,7 +7,7 @@
       var(--color-background) 30%,
       rgba(255, 255, 255, 0.02404289352459732) 85%
     ),
-    $addn, black;
+    $addn;
 }
 
 .about {
@@ -17,17 +17,18 @@
   background-color: black;
 
   @include bgGradient(
-    center / cover no-repeat url("../../assets/gifs/bebop_about.gif")
+    center / cover no-repeat
+      url("https://media.giphy.com/media/T5tnw3xsSagXhUrSKD/giphy.gif")
   );
+
+  // &.bgLight {
+  //   @include bgGradient(
+  //     center / cover no-repeat url("../../assets/gifs/strips-negate1.gif")
+  //   );
+  // }
 
   & > video {
     display: none;
-  }
-
-  @include media-breakpoint-down(sm) {
-    @include bgGradient(
-      center / contain no-repeat url("../../assets/gifs/bebop_about.gif")
-    );
   }
 
   .banner {
