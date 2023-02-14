@@ -1,59 +1,27 @@
+@import "../../styles/mixins/breakpoints";
+
 .cont {
-  position: sticky;
-  top: 0;
-  // left: 0;
-  // right: 0;
-  bottom: 0;
-  z-index: -1;
-}
-
-.viewWrap {
-  > div {
-    padding: 5% 10% 0% 10%;
-  }
-}
-
-.projectArticle {
-  overflow: hidden;
-  display: flex;
-  margin-bottom: 10rem;
   position: relative;
+  overflow-y: hidden;
+}
 
-  & .imgCont {
-    max-width: 35vw;
+.track {
+  position: absolute;
+  left: 50%;
+  display: flex;
+  gap: 4vmin;
+  user-select: none;
 
-    img {
-      max-width: 100%;
-      height: auto;
+  & > img {
+    width: 56vmin;
+    height: 78vmin;
+    object-fit: cover;
+    object-position: 100% center;
+    cursor: pointer;
+
+    @include media-breakpoint-down("md") {
+      width: 40vmin;
+      height: 56vmin;
     }
-  }
-
-  &:nth-of-type(6n + 1) {
-    justify-content: start;
-  }
-
-  &:nth-of-type(3n + 2) {
-    padding-right: 6%;
-    padding-left: 4%;
-  }
-
-  &:nth-of-type(3n + 3) {
-    padding-right: 4%;
-    padding-left: 6%;
-  }
-
-  &:nth-of-type(3n + 2),
-  &:nth-of-type(3n + 3) {
-    display: inline-block;
-    max-width: 50%;
-    vertical-align: top;
-  }
-
-  &:nth-of-type(6n + 2) {
-    margin-top: 55px;
-  }
-
-  &:nth-of-type(6n + 4) {
-    justify-content: flex-end;
   }
 }
