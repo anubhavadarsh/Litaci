@@ -1,46 +1,22 @@
-import { FC, forwardRef, ReactNode } from 'react';
-import { motion, HTMLMotionProps } from 'framer-motion';
+import { ComponentPropsWithRef, forwardRef, ReactNode } from 'react';
 import clsx from 'clsx';
 
 import styles from './Page.module.scss';
 
-interface Props extends HTMLMotionProps<'div'> {
-  motionProps?: HTMLMotionProps<'div'>;
+interface Props extends ComponentPropsWithRef<'article'> {
   children: ReactNode;
-  className?: string;
 }
+export type Ref = HTMLDivElement;
 
-//TODO: Fix the remove forward ref with motion() refer: https://www.framer.com/motion/component/
-const Page = forwardRef<HTMLDivElement, Props>(
-  (
-    {
-      motionProps,
-      className,
-      children,
-      onMouseDown,
-      onMouseMove,
-      onMouseUp,
-      onTouchMove,
-      onTouchStart,
-      onTouchEnd,
-    },
-    ref
-  ) => {
-    return (
-      <motion.div
-        onMouseDown={onMouseDown}
-        onMouseMove={onMouseMove}
-        onMouseUp={onMouseUp}
-        onTouchMove={onTouchMove}
-        onTouchStart={onTouchStart}
-        onTouchEnd={onTouchEnd}
-        {...motionProps}
-        className={clsx(styles.Page, className)}
-        ref={ref}>
-        {children}
-      </motion.div>
-    );
-  }
-);
+const Page = forwardRef<Ref, Props>(({ className, children, ...addn }, ref) => {
+  return (
+    <article
+      className={clsx(styles.Page, className)}
+      {...addn}
+      ref={ref}>
+      {children}
+    </article>
+  );
+});
 
 export default Page;

@@ -1,31 +1,27 @@
-import { FC, forwardRef, ReactNode } from 'react';
-import { motion, HTMLMotionProps } from 'framer-motion';
+import { ComponentPropsWithRef, FC, forwardRef, ReactNode } from 'react';
 import clsx from 'clsx';
 
 import styles from './Banner.module.scss';
 
-interface Props {
-  motionProps?: HTMLMotionProps<'div'>;
+interface Props extends ComponentPropsWithRef<'div'> {
   main: string;
-  className?: string;
   children?: ReactNode;
 }
+export type Ref = HTMLDivElement;
 
-const Banner: FC<Props> = forwardRef<HTMLDivElement, Props>(
-  ({ main, className, motionProps, children }, ref) => {
-    let newClasses = clsx(styles.banner, className);
-
+const Banner: FC<Props> = forwardRef<Ref, Props>(
+  ({ main, className, children, ...addn }, ref) => {
     return (
-      <motion.div
-        {...motionProps}
+      <div
         ref={ref}
-        className={newClasses}>
+        className={clsx(styles.banner, className)}
+        {...addn}>
         <h1>
           {main}
           <span>;</span>
         </h1>
         <h2>{children}</h2>
-      </motion.div>
+      </div>
     );
   }
 );
