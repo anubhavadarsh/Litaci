@@ -52,3 +52,15 @@
     cursor: pointer;
   }
 }
+
+.display {
+  display: grid;
+  place-items: center;
+  background-color: var(--color-background);
+  overflow-x: hidden;
+
+  h2 {
+    display: flex;
+    justify-content: space-evenly;
+  }
+}

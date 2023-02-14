@@ -11,8 +11,8 @@ const Home: FC = () => {
   return (
     <Page className={styles.wrapper}>
       <LandingPage />
-      <ProjectPage className={styles.home} />
-      <WorkPage className={styles.home} />
+      <ProjectPage className={styles.display} />
+      <WorkPage className={styles.display} />
     </Page>
   );
 };
