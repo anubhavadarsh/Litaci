@@ -59,18 +59,10 @@ export const projectSlice = createSlice({
           state.currentRequestId === action.meta.requestId
         ) {
           state.loading = 'succeeded';
-          const entities: IRepo[] = action.payload.map(
-            ({
-              id,
-              created_at,
-              description,
-              html_url,
-              language,
-              name,
-              stargazers_count,
-              topics,
-            }) => {
-              return {
+          const entities: IRepo[] = action.payload
+            .filter(({ topics }) => topics.includes('showcase'))
+            .map(
+              ({
                 id,
                 created_at,
                 description,
@@ -79,9 +71,19 @@ export const projectSlice = createSlice({
                 name,
                 stargazers_count,
                 topics,
-              };
-            }
-          );
+              }) => {
+                return {
+                  id,
+                  created_at,
+                  description,
+                  html_url,
+                  language,
+                  name,
+                  stargazers_count,
+                  topics,
+                };
+              }
+            );
 
           state.entities = entities;
           state.currentRequestId = undefined;

@@ -1,11 +1,22 @@
-import { FC, useState, useRef, useEffect } from 'react';
+import {
+  FC,
+  useRef,
+  useEffect,
+  forwardRef,
+  ComponentPropsWithRef,
+  useContext,
+} from 'react';
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
 
 import Page from 'containers/Page';
 import Banner from 'containers/Banner';
 import styles from './Project.module.scss';
-import { list } from './projectList';
+import { list as images } from './imageList';
+import { usePointerMovement } from './hook';
+import { useAppSelector, useAppDispatch } from 'store/hook';
+import { fetchProjects } from 'store/project/slice';
+import { IRepo } from 'services/api/Repos';
+import { themeCtx } from 'context/theme-context';
 
 export interface IPageProps {
   bannerStyles?: string;
@@ -13,43 +24,26 @@ export interface IPageProps {
 }
 
 const Project: FC<IPageProps> = ({ className: classProps, bannerStyles }) => {
-  const [mouseMovement, setMouseMovement] = useState(0);
-
   const contRef = useRef<HTMLDivElement>(null);
+  const {
+    mouseMovement,
+    handlePointerDown,
+    handlePointerMove,
+    handlePointerUp,
+  } = usePointerMovement(contRef);
 
-  const newClasses = clsx(classProps, styles.cont);
+  const dispatch = useAppDispatch();
+  const { entities } = useAppSelector((state) => state.projects);
 
-  const mouseAtRef = useRef(0);
-  const prevMousePosRef = useRef(mouseMovement);
-
-  const handlePointerDown = (cx: number) => {
-    mouseAtRef.current = cx;
-  };
-
-  const handlePointerMove = (cx: number) => {
-    if (mouseAtRef.current === 0) return;
-
-    const mouseDelta = mouseAtRef.current - cx,
-      maxDelta = window.innerWidth / 2;
-
-    const percentage = (mouseDelta / maxDelta) * -100,
-      nextPercentage = Math.max(
-        Math.min(prevMousePosRef.current + percentage, 0),
-        -100
-      );
-
-    setMouseMovement(nextPercentage);
-  };
-  const handlePointerUp = () => {
-    mouseAtRef.current = 0;
-    prevMousePosRef.current = mouseMovement;
-  };
+  useEffect(() => {
+    dispatch(fetchProjects());
+  }, []);
 
   return (
     <>
       <Page
         ref={contRef}
-        className={newClasses}
+        className={clsx(classProps, styles.cont)}
         onMouseDown={(e) => handlePointerDown(e.clientX)}
         onMouseMove={(e) => handlePointerMove(e.clientX)}
         onMouseUp={handlePointerUp}
@@ -60,13 +54,21 @@ const Project: FC<IPageProps> = ({ className: classProps, bannerStyles }) => {
           main='project'
           className={clsx(bannerStyles)}
         />
-        <Track moveBy={mouseMovement} />
+        <Track<IRepo>
+          moveBy={mouseMovement}
+          data={entities}
+        />
       </Page>
     </>
   );
 };
 
-const Track: FC<{ moveBy: number }> = ({ moveBy }) => {
+type TrackProps<T> = {
+  moveBy: number;
+  data: T[];
+};
+
+const Track = <T extends IRepo>({ moveBy, data }: TrackProps<T>) => {
   const r = useRef<HTMLDivElement>(null);
   const imgRefs = useRef<HTMLImageElement[]>([]);
 
@@ -92,21 +94,46 @@ const Track: FC<{ moveBy: number }> = ({ moveBy }) => {
     <div
       ref={r}
       className={styles.track}>
-      {list.map((i, index) => (
-        <motion.img
-          whileHover={{ scale: 1.025 }}
-          transition={{ duration: 0.3 }}
-          ref={(el) => {
-            imgRefs.current[index] = el!;
-          }}
-          draggable={false}
-          src={i.img}
-          key={i.img}
-          alt='test'
+      {data.map((r, index) => (
+        <TrackItem
+          item={r}
+          ref={(el) => (imgRefs.current[index] = el!)}
+          alt={r.name}
+          src={images[r.id % images.length].img}
+          key={r.id}
         />
       ))}
     </div>
   );
 };
+
+interface Props extends ComponentPropsWithRef<'image'> {
+  item: IRepo;
+  src: string;
+  alt: string;
+}
+
+const TrackItem = forwardRef<HTMLImageElement, Props>(
+  ({ item, src, alt }, ref) => {
+    const ctx = useContext(themeCtx);
+
+    return (
+      <article className={styles.child}>
+        <div className={styles.backdrop} />
+        <div className={styles.content}>
+          <span>{item.language}</span>
+          <span className={styles.tag}>{item.name}</span>
+        </div>
+        <img
+          className={clsx(ctx.dark && styles.bgDark)}
+          ref={ref}
+          draggable={false}
+          src={src}
+          alt={alt}
+        />
+      </article>
+    );
+  }
+);
 
 export default Project;
