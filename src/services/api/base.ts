@@ -16,6 +16,10 @@ const get = (url: string, options?: RequestInit | undefined) => {
         ...options.headers,
       };
     }
+
+    if (options.signal) {
+      ops.signal = options.signal;
+    }
   }
 
   return fetch(`${baseURL}${url}`, ops);

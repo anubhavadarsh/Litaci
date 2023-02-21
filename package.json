@@ -9,12 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.2",
     "clsx": "^1.2.1",
     "framer-motion": "^8.0.2",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.5",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.1",
     "remark-gfm": "^3.0.1",
     "sass": "^1.55.0",
