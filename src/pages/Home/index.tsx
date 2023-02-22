@@ -1,23 +1,23 @@
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
 import clsx from 'clsx';
 
 import Page from 'containers/Page';
-import ProjectPage from 'pages/Project';
+import ProjectLanding from 'pages/Project/Landing';
 import WorkPage from 'pages/Work';
 import styles from './Home.module.scss';
 import { themeCtx } from 'context/theme-context';
 
-const Home: FC = () => {
+const Home = () => {
   return (
     <Page className={styles.wrapper}>
-      <LandingPage />
-      <ProjectPage className={styles.display} />
+      <Landing />
+      <ProjectLanding className={styles.display} />
       <WorkPage className={styles.display} />
     </Page>
   );
 };
 
-const LandingPage: FC = () => {
+const Landing = () => {
   const ctx = useContext(themeCtx);
 
   return (

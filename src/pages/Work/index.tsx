@@ -1,14 +1,13 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import clsx from 'clsx';
 
 import Page from 'containers/Page';
 import SplitSection from 'components/SplitSection';
-import { IPageProps } from 'pages/Project';
+import { IPageProps } from 'pages/Project/Landing';
 import styles from './Work.module.scss';
 import Banner from 'containers/Banner';
-import { useScroll } from 'framer-motion';
 
-const Work: FC<IPageProps> = ({ bannerStyles, className: classProps }) => {
+const Work = ({ bannerStyles, className: classProps }: IPageProps) => {
   return (
     <Page className={classProps}>
       <WorkSplitSection bannerStyles={bannerStyles} />
@@ -37,7 +36,7 @@ const companies = [
 
 type IWSSProps = Omit<IPageProps, 'className'>;
 
-const WorkSplitSection: FC<IWSSProps> = ({ bannerStyles }) => {
+const WorkSplitSection = ({ bannerStyles }: IWSSProps) => {
   const [choice, setChoice] = useState(-1);
 
   const handleSecClose = () => {
