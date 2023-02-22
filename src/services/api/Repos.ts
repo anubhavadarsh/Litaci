@@ -8,6 +8,13 @@ export const Repos = {
       },
       signal,
     }),
+  single: (repo: string, signal: AbortSignal) =>
+    get(`repos/anubhavadarsh/${repo}`, {
+      headers: {
+        'Content-type': 'application/vnd.github+json',
+      },
+      signal,
+    }),
 };
 
 export interface IRepoResponse {

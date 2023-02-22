@@ -1,91 +1,48 @@
 @import "../../styles/mixins/breakpoints";
+@import "../../styles/mixins/coverLayout";
 
-.cont {
+.overflowHide {
   position: relative;
   overflow-y: hidden;
 }
 
-.track {
-  position: absolute;
-  left: 50%;
-  display: flex;
-  gap: 4vmin;
-  user-select: none;
+.page {
+  position: relative;
 
-  // & > img {
-  //   width: 56vmin;
-  //   height: 78vmin;
-  //   object-fit: cover;
-  //   object-position: 100% center;
-  //   cursor: pointer;
+  @include cover-layout(
+    "https://media.giphy.com/media/0Qf7aAyoTcPOGxblKO/giphy.gif"
+  );
 
-  //   @include media-breakpoint-down("md") {
-  //     width: 40vmin;
-  //     height: 56vmin;
-  //   }
-  // }
-
-  .child {
-    width: 56vmin;
-    height: 78vmin;
-    // object-fit: cover;
-    // object-position: 100% center;
-    cursor: pointer;
-    position: relative;
-
-    @include media-breakpoint-down("md") {
-      width: 40vmin;
-      height: 56vmin;
-    }
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 100% center;
+  .background {
+    filter: none;
+    &.dark {
       filter: invert(1);
-
-      &.bgDark {
-        filter: none;
-      }
     }
+    background: url(https://media2.giphy.com/media/l2Sqf1fbj1qrmaJ6E/giphy.gif?cid=ecf05e47af3bdzad5t2xe4c9veoewyj47g3f3e3wcli2np4a&rid=giphy.gif&ct=g);
+  }
 
-    // .backdrop {
-    //   width: 100%;
-    //   height: 100%;
-    //   position: absolute;
-    //   z-index: 1;
+  .banner {
+    h1 {
+      font-size: 8vw;
+    }
+  }
 
-    //   background: linear-gradient(
-    //     0deg,
-    //     var(--color-background) 0%,
-    //     var(--color-background) 5%,
-    //     var(--color-background) 16%,
-    //     rgba(255, 255, 255, 0.02404289352459732) 71%
-    //   );
-    // }
+  .content {
+    @include content;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 
-    .content {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      padding: 10px;
+    font-family: var(--font-family-noto-mono-Reg);
+    color: var(--color-text);
+    font-size: 1.2rem;
+    line-height: 1.7rem;
 
+    .child {
+      @include child;
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: flex-start;
-
-      font-family: var(--font-family-poppins-bold);
-      color: var(--color-text);
-      font-size: 12px;
-      z-index: 1;
-
-      .tag {
-        background-color: var(--color-text);
-        color: var(--color-background);
-        padding: 5px 10px;
-      }
+      justify-content: center;
+      gap: 15%;
     }
   }
 }
