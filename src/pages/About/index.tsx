@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import { useContext } from 'react';
 import clsx from 'clsx';
 
 import Page from 'containers/Page';
@@ -8,25 +8,15 @@ import getIcon from 'utils/getIcon';
 import { socialList } from 'components/SocialsMenu';
 import { themeCtx } from 'context/theme-context';
 
-const AboutPage: FC = () => {
+const AboutPage = () => {
   const ctx = useContext(themeCtx);
 
   return (
     <Page className={styles.about}>
-      <div className={styles.cover}>
-        <div
-          className={clsx(
-            styles.backdrop,
-            styles.background,
-            !ctx.dark && styles.bgDark
-          )}
-        />
-        <div className={clsx(styles.backdrop, styles.gradient)} />
-        <Banner
-          main='About'
-          className={styles.banner}
-        />
-      </div>
+      <Cover
+        name='about'
+        isDark={ctx.dark}
+      />
       <div className={styles.content}>
         <div className={styles.child}>
           <h2 className={clsx(styles.tag, styles.text)}>Background</h2>
@@ -45,25 +35,44 @@ const AboutPage: FC = () => {
           </div>
         </div>
         <div className={styles.child}>
-          <div className={styles.layer}>
-            <h2 id='contact'>contact</h2>
-            <p>
-              <span>Drop by, say hi at</span>{' '}
-              <a href='mailto:anubhav.adarsh9@gmail.com?subject=Hi, would love to catch up!'>
-                anubhav.adarsh9@gmail.com
-              </a>
-            </p>
-            <div>
-              <Links />
-            </div>
-          </div>
+          <Contact />
         </div>
       </div>
     </Page>
   );
 };
 
-const Links: FC = () => {
+const Cover = ({ name, isDark }: { name: string; isDark: boolean }) => {
+  return (
+    <div className={styles.cover}>
+      <div className={clsx(styles.background, isDark && styles.dark)} />
+      <div className={clsx(styles.backdrop, styles.gradient)} />
+      <Banner
+        main={name}
+        className={styles.banner}
+      />
+    </div>
+  );
+};
+
+const Contact = () => {
+  return (
+    <div className={styles.layer}>
+      <h2 id='contact'>contact</h2>
+      <p>
+        <span>Drop by, say hi at</span>{' '}
+        <a href='mailto:anubhav.adarsh9@gmail.com?subject=Hi, would love to catch up!'>
+          anubhav.adarsh9@gmail.com
+        </a>
+      </p>
+      <div>
+        <Links />
+      </div>
+    </div>
+  );
+};
+
+const Links = () => {
   return (
     <>
       {socialList.map(({ handle, link, name }) => {

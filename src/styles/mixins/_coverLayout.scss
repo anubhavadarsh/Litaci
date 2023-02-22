@@ -1,0 +1,74 @@
+@mixin bgGradient() {
+  background: linear-gradient(
+    0deg,
+    var(--color-background) 0%,
+    var(--color-background) 35%,
+    rgba(255, 255, 255, 0.02404289352459732) 85%
+  );
+}
+
+@mixin cover-layout($url) {
+  .cover {
+    width: 100vw;
+    height: 100vh;
+    padding: 8vmax 7vmin;
+    padding-bottom: 0;
+    position: fixed;
+    background-origin: content-box;
+    display: grid;
+    place-items: center start;
+
+    @include media-breakpoint-down(md) {
+      padding: 7vmin;
+      padding-bottom: 0;
+    }
+
+    .backdrop {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      padding: inherit;
+
+      &.gradient {
+        @include bgGradient();
+      }
+    }
+
+    .banner {
+      margin: 0;
+      padding: 0;
+      position: fixed;
+      @include media-breakpoint-down(md) {
+        margin: 5%;
+      }
+    }
+  }
+
+  .background {
+    width: 100%;
+    height: 100%;
+    background: center / cover no-repeat url($url);
+    filter: invert(1);
+    &.dark {
+      filter: none;
+    }
+  }
+}
+
+@mixin content {
+  background-color: var(--color-background);
+  background-clip: content-box;
+  padding-top: 70vh;
+  position: relative;
+}
+
+@mixin child {
+  margin-top: 8%;
+  padding: 5% 7vmin;
+  padding-bottom: 0;
+
+  @include media-breakpoint-down(md) {
+    padding: 1.5% 7vmin;
+    padding-bottom: 0;
+  }
+}
