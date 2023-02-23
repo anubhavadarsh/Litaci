@@ -27,22 +27,123 @@
     }
   }
 
-  .content {
-    @include content;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-
+  .contentBox {
     font-family: var(--font-family-noto-mono-Reg);
     color: var(--color-text);
     font-size: 1.2rem;
     line-height: 1.7rem;
+    @include content;
 
-    .child {
-      @include child;
+    > div:first-child {
+      $space-top: 24px;
+      padding: $space-top 7vmin 0 7vmin;
       display: flex;
-      justify-content: center;
-      gap: 15%;
+
+      article {
+        margin: 16px;
+        flex-grow: 1;
+        padding: 16px;
+
+        .boxHeader {
+          h2 {
+            font-size: 14px;
+          }
+        }
+      }
+
+      aside {
+        position: sticky;
+        top: 0;
+        flex: 0.4;
+        min-width: 400px;
+        height: 100vh;
+
+        > section {
+          border-bottom: 1px solid var(--color-text);
+          padding: $space-top 0 $space-top;
+          > * {
+            font-size: 16px;
+            margin-bottom: 16px;
+          }
+          h2 {
+            font-family: var(--font-family-noto-mono-bold);
+          }
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+
+        .about {
+          .link {
+            display: flex;
+            align-items: center;
+            svg {
+              fill: var(--color-text);
+              margin-right: 8px;
+            }
+
+            a {
+              &:hover {
+                border-bottom: 1px solid var(--color-text);
+              }
+
+              &:visited {
+                color: inherit;
+              }
+            }
+          }
+          .topicTag {
+            margin-right: 5px;
+            display: inline-block;
+            padding: 0 7px;
+            font-size: 12px;
+            line-height: 18px;
+            white-space: nowrap;
+            border-radius: 2em;
+            padding-right: 10px;
+            padding-left: 10px;
+            line-height: 22px;
+            color: var(--color-background);
+            background-color: var(--color-text);
+          }
+          .stat {
+            margin-top: 8px;
+            span {
+              display: flex;
+              align-items: center;
+              svg {
+                fill: var(--color-text);
+                margin-right: 8px;
+              }
+              strong {
+                margin-right: 8px;
+              }
+            }
+          }
+        }
+
+        .languages {
+          > div {
+            > span {
+              display: inline-flex;
+              align-items: center;
+              span {
+                font-size: 12px;
+                margin-right: 16px;
+              }
+              .color {
+                display: inline-block;
+                content: "";
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                margin-right: 8px;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

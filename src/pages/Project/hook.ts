@@ -85,7 +85,7 @@ const useGetReadme = () => {
   return { makeRequest, readMe };
 };
 
-type Lang = {
+export type Lang = {
   name: string;
   code: number;
 };

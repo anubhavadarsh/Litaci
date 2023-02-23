@@ -1,0 +1,14 @@
+.stat {
+  margin-top: 8px;
+  span {
+    display: flex;
+    align-items: center;
+    svg {
+      fill: var(--color-text);
+      margin-right: 8px;
+    }
+    strong {
+      margin-right: 8px;
+    }
+  }
+}
