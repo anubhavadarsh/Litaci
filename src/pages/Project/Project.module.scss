@@ -1,27 +1,213 @@
 @import "../../styles/mixins/breakpoints";
+@import "../../styles/mixins/coverLayout";
 
-.cont {
+.overflowHide {
   position: relative;
   overflow-y: hidden;
 }
 
-.track {
-  position: absolute;
-  left: 50%;
-  display: flex;
-  gap: 4vmin;
-  user-select: none;
+.page {
+  position: relative;
 
-  & > img {
-    width: 56vmin;
-    height: 78vmin;
-    object-fit: cover;
-    object-position: 100% center;
-    cursor: pointer;
+  @include cover-layout(
+    "https://media.giphy.com/media/0Qf7aAyoTcPOGxblKO/giphy.gif"
+  );
 
-    @include media-breakpoint-down("md") {
-      width: 40vmin;
-      height: 56vmin;
+  .background {
+    filter: none;
+    &.dark {
+      filter: invert(1);
+    }
+    background: url(https://media2.giphy.com/media/l2Sqf1fbj1qrmaJ6E/giphy.gif?cid=ecf05e47af3bdzad5t2xe4c9veoewyj47g3f3e3wcli2np4a&rid=giphy.gif&ct=g);
+  }
+
+  .banner {
+    h1 {
+      font-size: 8vw;
+    }
+  }
+
+  .contentBox {
+    font-family: var(--font-family-noto-mono-Reg);
+    color: var(--color-text);
+    font-size: 1.2rem;
+    line-height: 1.7rem;
+    @include content;
+
+    > div:first-child {
+      $space-top: 24px;
+      padding: $space-top 7vmin 0 7vmin;
+      display: flex;
+
+      article {
+        flex-grow: 1;
+        padding: 16px;
+        padding-top: 24px;
+
+        .boxHeader {
+          h2 {
+            font-size: 14px;
+          }
+          margin-bottom: 16px;
+        }
+        //TODO:Fix the styling, doesn't really go with the current style; try working with custom components for react markdown
+        .readme {
+          font-size: 16px;
+          line-height: 1.5;
+
+          h1,
+          h2,
+          h3,
+          h4,
+          h5,
+          h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            line-height: 1.25;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            border-bottom: 1px solid #555555;
+          }
+
+          code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            white-space: break-spaces;
+            background-color: #555555;
+            border-radius: 6px;
+          }
+
+          P {
+            margin-bottom: 16px;
+          }
+
+          pre {
+            margin: 0;
+            margin-bottom: 16px;
+            padding: 16px;
+            overflow: auto;
+            font-size: 85%;
+            line-height: 1.45;
+            background-color: #161b22;
+            border-radius: 6px;
+
+            code {
+              padding: unset;
+              margin: unset;
+              font-size: unset;
+              white-space: unset;
+              background-color: unset;
+              border-radius: unset;
+            }
+          }
+
+          ul {
+            padding-left: 2em;
+            margin-bottom: 16px;
+          }
+
+          a {
+            &:visited {
+              color: #0059b2;
+            }
+          }
+        }
+      }
+
+      aside {
+        position: sticky;
+        top: 0;
+        flex: 0.4;
+        min-width: 400px;
+        height: 100vh;
+
+        > section {
+          border-bottom: 1px solid var(--color-text);
+          padding: $space-top 0 $space-top;
+          > * {
+            font-size: 16px;
+            margin-bottom: 16px;
+          }
+          h2 {
+            font-family: var(--font-family-noto-mono-bold);
+          }
+
+          &:last-child {
+            border-bottom: none;
+          }
+        }
+
+        .about {
+          .link {
+            display: flex;
+            align-items: center;
+            svg {
+              fill: var(--color-text);
+              margin-right: 8px;
+            }
+
+            a {
+              &:hover {
+                border-bottom: 1px solid var(--color-text);
+              }
+
+              &:visited {
+                color: inherit;
+              }
+            }
+          }
+          .topicTag {
+            margin-right: 5px;
+            display: inline-block;
+            padding: 0 7px;
+            font-size: 12px;
+            line-height: 18px;
+            white-space: nowrap;
+            border-radius: 2em;
+            padding-right: 10px;
+            padding-left: 10px;
+            line-height: 22px;
+            color: var(--color-background);
+            background-color: var(--color-text);
+          }
+          .stat {
+            margin-top: 8px;
+            span {
+              display: flex;
+              align-items: center;
+              svg {
+                fill: var(--color-text);
+                margin-right: 8px;
+              }
+              strong {
+                margin-right: 8px;
+              }
+            }
+          }
+        }
+
+        .languages {
+          > div {
+            > span {
+              display: inline-flex;
+              align-items: center;
+              span {
+                font-size: 12px;
+                margin-right: 16px;
+              }
+              .color {
+                display: inline-block;
+                content: "";
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                margin-right: 8px;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

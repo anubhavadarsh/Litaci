@@ -1,111 +1,147 @@
-import { FC, useState, useRef, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
+import { useLoaderData } from 'react-router-dom';
 import clsx from 'clsx';
-import { motion } from 'framer-motion';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 import Page from 'containers/Page';
-import Banner from 'containers/Banner';
 import styles from './Project.module.scss';
-import { list } from './projectList';
+import Banner from 'containers/Banner';
+import Stats from 'components/RepoStats';
+import { IRepoResponse, Repos } from 'services/api/Repos';
+import { themeCtx } from 'context/theme-context';
+import { ReactComponent as LinkIcon } from 'assets/icons/link.svg';
+import { getColor } from './util';
+import { Lang, useGetLang, useGetReadme } from './hook';
 
-export interface IPageProps {
-  bannerStyles?: string;
-  className?: string;
-}
+const Project = () => {
+  const data = useLoaderData() as IRepoResponse;
+  const ctx = useContext(themeCtx);
 
-const Project: FC<IPageProps> = ({ className: classProps, bannerStyles }) => {
-  const [mouseMovement, setMouseMovement] = useState(0);
+  const { makeRequest: mkReqReadme, readMe } = useGetReadme();
+  const { makeRequest: mkReqLang, langs } = useGetLang();
 
-  const contRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const ac = new AbortController();
+    (async () => {
+      mkReqReadme({ repo: data.name, ac }, Repos.singleContentReadme);
+      mkReqLang({ repo: data.name, ac }, Repos.singlelanguages);
+    })();
 
-  const newClasses = clsx(classProps, styles.cont);
-
-  const mouseAtRef = useRef(0);
-  const prevMousePosRef = useRef(mouseMovement);
-
-  const handlePointerDown = (cx: number) => {
-    mouseAtRef.current = cx;
-  };
-
-  const handlePointerMove = (cx: number) => {
-    if (mouseAtRef.current === 0) return;
-
-    const mouseDelta = mouseAtRef.current - cx,
-      maxDelta = window.innerWidth / 2;
-
-    const percentage = (mouseDelta / maxDelta) * -100,
-      nextPercentage = Math.max(
-        Math.min(prevMousePosRef.current + percentage, 0),
-        -100
-      );
-
-    setMouseMovement(nextPercentage);
-  };
-  const handlePointerUp = () => {
-    mouseAtRef.current = 0;
-    prevMousePosRef.current = mouseMovement;
-  };
+    return () => ac.abort();
+  }, []);
 
   return (
-    <>
-      <Page
-        ref={contRef}
-        className={newClasses}
-        onMouseDown={(e) => handlePointerDown(e.clientX)}
-        onMouseMove={(e) => handlePointerMove(e.clientX)}
-        onMouseUp={handlePointerUp}
-        onTouchStart={(e) => handlePointerDown(e.touches[0].clientX)}
-        onTouchMove={(e) => handlePointerMove(e.touches[0].clientX)}
-        onTouchEnd={handlePointerUp}>
-        <Banner
-          main='project'
-          className={clsx(bannerStyles)}
-        />
-        <Track moveBy={mouseMovement} />
-      </Page>
-    </>
+    <Page className={styles.page}>
+      <Cover
+        name={data.name}
+        isDark={ctx.dark}
+      />
+      <div className={styles.contentBox}>
+        <div>
+          <article>
+            <div className={styles.boxHeader}>
+              <h2>README.md</h2>
+            </div>
+            <main className={styles.readme}>
+              <ReactMarkdown
+                children={readMe}
+                remarkPlugins={[remarkGfm]}
+              />
+            </main>
+          </article>
+          <Sidebar
+            deployLink={data.homepage}
+            description={data.description || ''}
+            forkCount={data.forks_count}
+            langs={langs}
+            starCount={data.stargazers_count}
+            topics={data.topics}
+            watchCount={data.watchers_count}
+          />
+        </div>
+      </div>
+    </Page>
   );
 };
 
-const Track: FC<{ moveBy: number }> = ({ moveBy }) => {
-  const r = useRef<HTMLDivElement>(null);
-  const imgRefs = useRef<HTMLImageElement[]>([]);
-
-  useEffect(() => {
-    if (r.current) {
-      r.current.animate([{ transform: `translateX(${moveBy}%)` }], {
-        duration: 1200,
-        fill: 'forwards',
-      });
-    }
-
-    if (imgRefs.current) {
-      imgRefs.current.forEach((el) => {
-        el.animate([{ objectPosition: `${moveBy + 100}% 50%` }], {
-          duration: 1200,
-          fill: 'forwards',
-        });
-      });
-    }
-  }, [moveBy]);
-
+const Cover = ({ name, isDark }: { name: string; isDark: boolean }) => {
   return (
-    <div
-      ref={r}
-      className={styles.track}>
-      {list.map((i, index) => (
-        <motion.img
-          whileHover={{ scale: 1.025 }}
-          transition={{ duration: 0.3 }}
-          ref={(el) => {
-            imgRefs.current[index] = el!;
-          }}
-          draggable={false}
-          src={i.img}
-          key={i.img}
-          alt='test'
-        />
-      ))}
+    <div className={styles.cover}>
+      <div className={clsx(styles.background, isDark && styles.dark)} />
+      <div className={clsx(styles.backdrop, styles.gradient)} />
+      <Banner
+        className={styles.banner}
+        main={name}
+      />
     </div>
+  );
+};
+
+const Sidebar = ({
+  description,
+  deployLink,
+  topics,
+  starCount,
+  watchCount,
+  forkCount,
+  langs,
+}: {
+  description: string;
+  deployLink: string;
+  topics: string[];
+  starCount: number;
+  watchCount: number;
+  forkCount: number;
+  langs: Lang[];
+}) => {
+  return (
+    <aside>
+      <section className={styles.about}>
+        <h2>About</h2>
+        <p>{description}</p>
+        <div className={styles.link}>
+          <LinkIcon />
+          <span>
+            <a
+              role='link'
+              target='_blank'
+              rel='noopener noreferrer nofollow'
+              href={deployLink}>
+              {deployLink.substring(8)}
+            </a>
+          </span>
+        </div>
+        <div>
+          {topics.map((topic) => (
+            <span
+              key={topic}
+              className={styles.topicTag}>
+              {topic}
+            </span>
+          ))}
+        </div>
+        <Stats
+          forkCount={forkCount}
+          starCount={starCount}
+          watchCount={watchCount}
+        />
+      </section>
+      <section className={styles.languages}>
+        <h2>Languages</h2>
+        <div>
+          {langs.map((l) => (
+            <span key={l.code}>
+              <span
+                className={styles.color}
+                style={{ background: `${getColor(l.name)}` }}
+              />
+              <span>{l.name}</span>
+            </span>
+          ))}
+        </div>
+      </section>
+    </aside>
   );
 };
 
