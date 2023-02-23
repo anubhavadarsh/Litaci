@@ -15,6 +15,21 @@ export const Repos = {
       },
       signal,
     }),
+  singlelanguages: (repo: string, signal: AbortSignal) =>
+    get(`repos/anubhavadarsh/${repo}/languages`, {
+      headers: {
+        'Content-type': 'application/vnd.github+json',
+      },
+      signal,
+    }),
+  singleContentReadme: (repo: string, signal: AbortSignal) =>
+    get(`repos/anubhavadarsh/${repo}/contents/README.md`, {
+      headers: {
+        Accept: 'application/vnd.github.raw',
+        'Content-type': 'application/vnd.github.raw',
+      },
+      signal,
+    }),
 };
 
 export interface IRepoResponse {
@@ -53,7 +68,7 @@ export interface IRepoResponse {
   has_pages: boolean;
   has_projects: boolean;
   has_wiki: boolean;
-  homepage: '';
+  homepage: string;
   hooks_url: URL;
   html_url: URL;
   id: number;

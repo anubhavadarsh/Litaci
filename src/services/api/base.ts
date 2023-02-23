@@ -1,10 +1,10 @@
 const baseURL = import.meta.env.VITE_APP_API_URL;
 const token = import.meta.env.VITE_APP_GITHUB_TOKEN;
 
-const get = (url: string, options?: RequestInit | undefined) => {
+const get = (url: string, options?: RequestInit | undefined, base?: string) => {
   const ops: RequestInit = {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `token ${token}`,
       'Content-type': 'application/vnd.github.object',
     },
   };
@@ -22,7 +22,7 @@ const get = (url: string, options?: RequestInit | undefined) => {
     }
   }
 
-  return fetch(`${baseURL}${url}`, ops);
+  return fetch(`${base || baseURL}${url}`, ops);
 };
 
 export { get };
