@@ -43,7 +43,7 @@ const Project = () => {
             <div className={styles.boxHeader}>
               <h2>README.md</h2>
             </div>
-            <main>
+            <main className={styles.readme}>
               <ReactMarkdown
                 children={readMe}
                 remarkPlugins={[remarkGfm]}

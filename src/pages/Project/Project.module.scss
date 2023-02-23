@@ -40,13 +40,77 @@
       display: flex;
 
       article {
-        margin: 16px;
         flex-grow: 1;
         padding: 16px;
+        padding-top: 24px;
 
         .boxHeader {
           h2 {
             font-size: 14px;
+          }
+          margin-bottom: 16px;
+        }
+        //TODO:Fix the styling, doesn't really go with the current style; try working with custom components for react markdown
+        .readme {
+          font-size: 16px;
+          line-height: 1.5;
+
+          h1,
+          h2,
+          h3,
+          h4,
+          h5,
+          h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            line-height: 1.25;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            border-bottom: 1px solid #555555;
+          }
+
+          code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            white-space: break-spaces;
+            background-color: #555555;
+            border-radius: 6px;
+          }
+
+          P {
+            margin-bottom: 16px;
+          }
+
+          pre {
+            margin: 0;
+            margin-bottom: 16px;
+            padding: 16px;
+            overflow: auto;
+            font-size: 85%;
+            line-height: 1.45;
+            background-color: #161b22;
+            border-radius: 6px;
+
+            code {
+              padding: unset;
+              margin: unset;
+              font-size: unset;
+              white-space: unset;
+              background-color: unset;
+              border-radius: unset;
+            }
+          }
+
+          ul {
+            padding-left: 2em;
+            margin-bottom: 16px;
+          }
+
+          a {
+            &:visited {
+              color: #0059b2;
+            }
           }
         }
       }
