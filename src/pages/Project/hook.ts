@@ -2,7 +2,7 @@ import { useState, useRef, RefObject } from 'react';
 import { Repos } from 'services/api/Repos';
 import { extractContentType } from './util';
 
-const usePointerMovement = (ref: RefObject<HTMLElement>) => {
+const usePointerMovement = () => {
   const [mouseMovement, setMouseMovement] = useState(0);
 
   const mouseAtRef = useRef(0);
