@@ -8,7 +8,7 @@
 
 .page {
   position: relative;
-
+  overflow-x: hidden;
   @include cover-layout(
     "https://media.giphy.com/media/0Qf7aAyoTcPOGxblKO/giphy.gif"
   );
@@ -38,10 +38,17 @@
       $space-top: 24px;
       padding: $space-top 7vmin 0 7vmin;
       display: flex;
+      flex-direction: column-reverse;
+
+      @include media-breakpoint-down(md) {
+        flex-direction: row;
+      }
 
       article {
         flex-grow: 1;
-        padding: 16px;
+        @include media-breakpoint-down(md) {
+          padding: 16px;
+        }
         padding-top: 24px;
 
         .boxHeader {
@@ -116,10 +123,13 @@
       }
 
       aside {
-        position: sticky;
         top: 0;
         flex: 0.4;
-        min-width: 400px;
+        min-width: 300px;
+        @include media-breakpoint-down(md) {
+          position: sticky;
+          min-width: 350px;
+        }
         height: 100vh;
 
         > section {

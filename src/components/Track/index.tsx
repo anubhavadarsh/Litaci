@@ -69,6 +69,26 @@ const TrackItem = forwardRef<HTMLImageElement, Props>(
     const ctx = useContext(themeCtx);
     const navigate = useNavigate();
 
+    const mouseInitialRef = useRef(0);
+    const mouseAtRef = useRef(0);
+
+    const handlePointerDown = (cx: number) => {
+      mouseInitialRef.current = cx;
+      mouseAtRef.current = cx;
+    };
+
+    const handlePointerMove = (cx: number) => {
+      mouseAtRef.current = cx;
+    };
+
+    const handlePointerUp = () => {
+      if (mouseAtRef.current !== mouseInitialRef.current) return;
+
+      mouseAtRef.current = 0;
+      mouseInitialRef.current = 0;
+      navigate(`/project/${item.name}`);
+    };
+
     const handleClick = () => {
       navigate(`/project/${item.name}`);
     };
@@ -78,8 +98,12 @@ const TrackItem = forwardRef<HTMLImageElement, Props>(
         whileHover={{ scale: 1.05 }}
         transition={{ duration: 0.3 }}
         className={styles.child}
-        onClick={handleClick}
-        onTouchEnd={handleClick}>
+        onMouseDown={(e) => handlePointerDown(e.clientX)}
+        onMouseMove={(e) => handlePointerMove(e.clientX)}
+        onMouseUp={handlePointerUp}
+        onTouchStart={(e) => handlePointerDown(e.touches[0].clientX)}
+        onTouchMove={(e) => handlePointerMove(e.touches[0].clientX)}
+        onTouchEnd={handlePointerUp}>
         <div className={styles.backdrop} />
         <div className={styles.content}>
           <span>{item.language}</span>

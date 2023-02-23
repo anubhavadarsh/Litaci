@@ -22,7 +22,7 @@ const Landing = ({ className: classProps, bannerStyles }: IPageProps) => {
     handlePointerDown,
     handlePointerMove,
     handlePointerUp,
-  } = usePointerMovement(contRef);
+  } = usePointerMovement();
 
   const dispatch = useAppDispatch();
   const { entities } = useAppSelector((state) => state.projects);
