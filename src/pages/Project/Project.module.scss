@@ -6,6 +6,33 @@
   overflow-y: hidden;
 }
 
+.cue {
+  display: none;
+  @include media-breakpoint-down(md) {
+    display: inline-block;
+  }
+  position: absolute;
+  z-index: var(--zindex-common);
+  top: 10%;
+  right: 20%;
+
+  span {
+    font-family: var(--font-family-reenie-Reg);
+    color: var(--color-text);
+    font-size: 32px;
+    position: absolute;
+    top: -35%;
+    right: -25%;
+    transform: rotate(18deg);
+    user-select: none;
+  }
+
+  svg {
+    fill: var(--color-text);
+    transform: rotateY(180deg);
+  }
+}
+
 .page {
   position: relative;
   overflow-x: hidden;

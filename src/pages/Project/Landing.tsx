@@ -9,6 +9,7 @@ import { useAppSelector, useAppDispatch } from 'store/hook';
 import { fetchProjects } from 'store/project/slice';
 import { IRepo } from 'services/api/Repos';
 import Track from 'components/Track';
+import { ReactComponent as Arrow } from 'assets/icons/arrow.svg';
 
 export interface IPageProps {
   bannerStyles?: string;
@@ -45,6 +46,13 @@ const Landing = ({ className: classProps, bannerStyles }: IPageProps) => {
         main='project'
         className={clsx(bannerStyles)}
       />
+      <div className={styles.cue}>
+        <span>Drag</span>
+        <Arrow
+          height={80}
+          width={80}
+        />
+      </div>
       <Track<IRepo>
         moveBy={mouseMovement}
         data={entities}

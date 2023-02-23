@@ -36,6 +36,12 @@
   font-weight: 700;
 }
 
+@font-face {
+  font-family: ReenieReg;
+  src: url(./fonts/Reenie_Beanie/ReenieBeanie-Regular.ttf) format("truetype");
+  font-weight: 400;
+}
+
 :root {
   --font-family-noto-mono-light: NotoMonoLight, sans-serif;
   --font-family-noto-mono-Reg: NotoMonoReg, sans-serif;
@@ -43,4 +49,5 @@
   --font-family-poppins-light: PoppinsLight, sans-serif;
   --font-family-poppins-Reg: PoppinsReg, sans-serif;
   --font-family-poppins-bold: PoppinsBold, sans-serif;
+  --font-family-reenie-Reg: ReenieReg, sans-serif;
 }
