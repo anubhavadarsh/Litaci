@@ -50,7 +50,7 @@ const Track = <T extends IRepo>({ moveBy, data }: TrackProps<T>) => {
           item={r}
           ref={(el) => (imgRefs.current[index] = el!)}
           alt={r.name}
-          src={images[r.id % images.length].img}
+          src={images[(index + 4) % images.length].img}
           key={r.id}
         />
       ))}
@@ -89,10 +89,6 @@ const TrackItem = forwardRef<HTMLImageElement, Props>(
       navigate(`/project/${item.name}`);
     };
 
-    const handleClick = () => {
-      navigate(`/project/${item.name}`);
-    };
-
     return (
       <motion.article
         whileHover={{ scale: 1.05 }}
@@ -106,8 +102,10 @@ const TrackItem = forwardRef<HTMLImageElement, Props>(
         onTouchEnd={handlePointerUp}>
         <div className={styles.backdrop} />
         <div className={styles.content}>
+          <div>
+            <span className={styles.tag}>{item.name}</span>
+          </div>
           <span>{item.language}</span>
-          <span className={styles.tag}>{item.name}</span>
         </div>
         <img
           className={clsx(ctx.dark && styles.bgDark)}

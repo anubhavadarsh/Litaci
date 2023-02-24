@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 import Page from 'containers/Page';
@@ -45,6 +45,22 @@ const companies = [
 
 const Work = ({ bannerStyles, className: classProps }: IPageProps) => {
   const [hover, setHover] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const listen = () => {
+      if (window.innerWidth < 768) return setIsMobile(true);
+      else {
+        setIsMobile(false);
+      }
+    };
+
+    listen();
+
+    window.addEventListener('resize', listen);
+
+    return () => window.removeEventListener('resize', listen);
+  }, []);
 
   const handleMouseEnter = (el: string) => () => {
     setHover(el);
@@ -76,8 +92,9 @@ const Work = ({ bannerStyles, className: classProps }: IPageProps) => {
               onMouseEnter={handleMouseEnter(c.name)}
               onMouseLeave={handleMouseLeave}
               style={{
-                color: hover == c.name ? c.color.ac : undefined,
-                backgroundColor: hover == c.name ? c.color.bg : undefined,
+                color: hover == c.name || isMobile ? c.color.ac : undefined,
+                backgroundColor:
+                  hover == c.name || isMobile ? c.color.bg : undefined,
               }}
               className={clsx(hover == c.name && styles.bg)}>
               <h3>{c.name}</h3>
