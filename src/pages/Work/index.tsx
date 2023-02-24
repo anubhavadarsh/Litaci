@@ -6,72 +6,86 @@ import SplitSection from 'components/SplitSection';
 import { IPageProps } from 'pages/Project/Landing';
 import styles from './Work.module.scss';
 import Banner from 'containers/Banner';
-
-const Work = ({ bannerStyles, className: classProps }: IPageProps) => {
-  return (
-    <Page className={classProps}>
-      <WorkSplitSection bannerStyles={bannerStyles} />
-    </Page>
-  );
-};
+import { ReactComponent as Arrow } from 'assets/icons/arrow-2.svg';
 
 const companies = [
   {
     name: 'Bright Money',
+    color: {
+      bg: '#16c75dea',
+      ac: '#fdfdfd',
+    },
     src: '',
   },
   {
     name: 'Merakii',
+    color: {
+      bg: '#f6971bea',
+      ac: '#fdfdfd',
+    },
     src: '',
   },
   {
-    name: 'Founders Lab',
+    name: 'Neon Sundae',
+    color: {
+      bg: '#1f1e23ea',
+      ac: '#e16cfc',
+    },
     src: '',
   },
   {
     name: 'Innovatyv',
+    color: {
+      bg: '#fdfdfdea',
+      ac: '#4d79be',
+    },
     src: '',
   },
 ];
 
-type IWSSProps = Omit<IPageProps, 'className'>;
+const Work = ({ bannerStyles, className: classProps }: IPageProps) => {
+  const [hover, setHover] = useState<string | null>(null);
 
-const WorkSplitSection = ({ bannerStyles }: IWSSProps) => {
-  const [choice, setChoice] = useState(-1);
-
-  const handleSecClose = () => {
-    setChoice(-1);
+  const handleMouseEnter = (el: string) => () => {
+    setHover(el);
   };
 
-  const handleSecSet = (index: number) => {
-    setChoice(index);
+  const handleMouseLeave = () => {
+    setHover(null);
   };
-
-  const isOpen = choice != -1;
 
   return (
-    <SplitSection
-      closeSection={handleSecClose}
-      isOpen={isOpen}
-      company={isOpen ? companies[choice].name : ''}>
-      <Banner
-        main='work'
-        className={clsx(bannerStyles, styles.banner, isOpen && styles.__split)}>
-        {companies.map((c, i) => {
-          return (
-            <a
-              key={i}
-              className={clsx(choice == i && styles.__active)}
-              onClick={(e) => {
-                e.stopPropagation();
-                handleSecSet(i);
-              }}>
-              {c.name}
-            </a>
-          );
-        })}
-      </Banner>
-    </SplitSection>
+    <>
+      <Page className={clsx(classProps, styles.page)}>
+        <Banner
+          main='work'
+          className={styles.banner}
+        />
+        <div className={styles.cue}>
+          <span>Scroll</span>
+          <Arrow
+            height={80}
+            width={80}
+          />
+        </div>
+      </Page>
+      <div className={styles.gallery}>
+        {companies.map((c) => (
+          <section key={c.name}>
+            <article
+              onMouseEnter={handleMouseEnter(c.name)}
+              onMouseLeave={handleMouseLeave}
+              style={{
+                color: hover == c.name ? c.color.ac : undefined,
+                backgroundColor: hover == c.name ? c.color.bg : undefined,
+              }}
+              className={clsx(hover == c.name && styles.bg)}>
+              <h3>{c.name}</h3>
+            </article>
+          </section>
+        ))}
+      </div>
+    </>
   );
 };
 

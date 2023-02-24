@@ -1,42 +1,110 @@
-.banner {
-  a {
-    padding-bottom: 10px;
-    cursor: pointer;
+@import "../../styles/mixins/breakpoints";
+
+.cue {
+  display: none;
+  @include media-breakpoint-down(md) {
     display: inline-block;
-    margin-right: 20px;
-    position: relative;
+  }
+  position: absolute;
+  z-index: var(--zindex-common);
+  bottom: 0;
+  right: 5%;
 
-    &:last-of-type {
-      margin: 0;
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 50%;
-      display: block;
-      background: none repeat scroll 0 0 transparent;
-      bottom: 0;
-      width: 0;
-      height: 3px;
-      background-color: var(--color-text);
-      transition: width 0.3s ease 0s, left 0.3s ease 0s;
-    }
-
-    &:hover::after,
-    &.__active::after {
-      width: 100% !important; //TODO fix this styling!
-      left: 0 !important;
-    }
+  span {
+    font-family: var(--font-family-reenie-Reg);
+    color: var(--color-text);
+    font-size: 32px;
+    position: absolute;
+    top: 0%;
+    right: -20%;
+    transform: rotate(24deg);
+    user-select: none;
   }
 
-  &.__split {
-    h1 {
-      font-size: 5vw;
+  svg {
+    fill: var(--color-text);
+    transform: rotate(180deg);
+  }
+}
+
+.page {
+  position: fixed;
+  width: 100%;
+  z-index: -1;
+  top: 0;
+}
+.gallery {
+  min-height: 100vh;
+  height: auto;
+  display: flex !important;
+  flex-wrap: wrap;
+  align-items: stretch;
+  padding-top: 100vh;
+  section {
+    min-width: 100vw;
+    min-height: 50vh;
+    @include media-breakpoint-down(md) {
+      min-width: 50vw;
+      min-height: 50vh;
+    }
+    flex-grow: 1;
+
+    border-bottom: 1px solid var(--color-text);
+    &:last-of-type {
+      border-bottom: none;
     }
 
-    h2 {
-      font-size: 0.7vw;
+    @include media-breakpoint-down(md) {
+      border-bottom: none;
+
+      &:nth-of-type(odd) {
+        border-right: 1px solid var(--color-text);
+      }
+
+      &:nth-of-type(3n) {
+        border-top: 1px solid var(--color-text);
+      }
+
+      &:nth-of-type(4n) {
+        border-top: 1px solid var(--color-text);
+      }
+
+      &:nth-of-type(5n) {
+        border-top: 1px solid var(--color-text);
+      }
+
+      &:nth-of-type(7n) {
+        border-top: 1px solid var(--color-text);
+      }
+    }
+    display: flex;
+    article {
+      flex: 1;
+      background: var(--color-accent-muted);
+      color: var(--color-text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      h3 {
+        font-size: 5vw;
+        @include media-breakpoint-down(md) {
+          font-size: 2vw;
+        }
+        font-family: var(--font-family-poppins-bold);
+      }
+
+      &.bg::after {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background: center / contain no-repeat
+            url("https://media.giphy.com/media/WkZ2t3SHy2Zyw/giphy.gif"),
+          black;
+        z-index: -1;
+      }
     }
   }
 }

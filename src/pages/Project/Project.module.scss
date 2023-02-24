@@ -21,15 +21,15 @@
     color: var(--color-text);
     font-size: 32px;
     position: absolute;
-    top: -35%;
-    right: -25%;
-    transform: rotate(18deg);
+    top: 0%;
+    right: -20%;
+    transform: rotate(24deg);
     user-select: none;
   }
 
   svg {
     fill: var(--color-text);
-    transform: rotateY(180deg);
+    transform: rotate(180deg);
   }
 }
 

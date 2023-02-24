@@ -19,10 +19,12 @@ html {
 body {
   --color-background: var(--color-primary-light);
   --color-text: var(--color-primary-dark);
+  --color-accent-muted: var(--color-primary-light-muted);
 
   &.dark {
     --color-background: var(--color-primary-dark);
     --color-text: var(--color-primary-light);
+    --color-accent-muted: var(--color-primary-dark-muted);
   }
 
   background-color: var(--color-background);
