@@ -11,7 +11,7 @@ import { motion } from 'framer-motion';
 
 import styles from './Track.module.scss';
 import { list as images } from 'pages/Project/imageList';
-import { IRepo } from 'services/api/Repos';
+import { IRepo } from 'services/api/repo';
 import { themeCtx } from 'context/theme-context';
 
 type TrackProps<T> = {

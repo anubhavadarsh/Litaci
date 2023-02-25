@@ -1,5 +1,5 @@
-import { useState, useRef, RefObject } from 'react';
-import { Repos } from 'services/api/Repos';
+import { useState, useRef } from 'react';
+import { repo as repoAPI } from 'services/api/repo';
 import { extractContentType } from './util';
 
 const usePointerMovement = () => {
@@ -53,7 +53,7 @@ const useGetReadme = () => {
 
   const makeRequest = async (
     config: { repo: string; ac: AbortController },
-    request: typeof Repos.singleContentReadme
+    request: typeof repoAPI.getRepoReadmeContent
   ) => {
     try {
       const response = await request(config.repo, config.ac.signal);
@@ -95,7 +95,7 @@ const useGetLang = () => {
 
   const makeRequest = async (
     config: { repo: string; ac: AbortController },
-    request: typeof Repos.singleContentReadme
+    request: typeof repoAPI.getRepoLanguages
   ) => {
     try {
       const response = await request(config.repo, config.ac.signal);

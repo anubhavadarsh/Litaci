@@ -4,7 +4,7 @@ import {
   SerializedError,
   current,
 } from '@reduxjs/toolkit';
-import { Repos, IRepo, IRepoResponse } from 'services/api/Repos';
+import { repo as repoAPI, IRepo, IRepoResponse } from 'services/api/repo';
 
 interface projectState {
   entities: IRepo[];
@@ -32,7 +32,7 @@ export const fetchProjects = createAsyncThunk<
 >('projects/fetchAll', async (_, thunkAPI) => {
   const { currentRequestId, loading } = thunkAPI.getState().projects;
   if (loading !== 'loading' && thunkAPI.requestId !== currentRequestId) return;
-  const response = await Repos.index(thunkAPI.signal);
+  const response = await repoAPI.index(thunkAPI.signal);
   const json = await response.json();
   return json;
 });

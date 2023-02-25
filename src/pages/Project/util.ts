@@ -1,5 +1,5 @@
 import { Params, json } from 'react-router-dom';
-import { IRepoResponse, Repos } from 'services/api/Repos';
+import { IRepoResponse, repo as repoAPI } from 'services/api/repo';
 
 export const loader = async ({
   request,
@@ -8,8 +8,8 @@ export const loader = async ({
   request: Request;
   params: Params<string>;
 }) => {
-  if (params.projectName) {
-    const res = await Repos.single(params.projectName, request.signal);
+  if (params.name) {
+    const res = await repoAPI.getRepoDetails(params.name, request.signal);
     const data: IRepoResponse = await res.json();
 
     if (res.status === 404 || !data.topics.includes('showcase')) {

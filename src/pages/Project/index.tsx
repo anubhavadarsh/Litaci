@@ -8,7 +8,7 @@ import Page from 'containers/Page';
 import styles from './Project.module.scss';
 import Banner from 'containers/Banner';
 import Stats from 'components/RepoStats';
-import { IRepoResponse, Repos } from 'services/api/Repos';
+import { IRepoResponse, repo as repoAPI } from 'services/api/repo';
 import { themeCtx } from 'context/theme-context';
 import { ReactComponent as LinkIcon } from 'assets/icons/link.svg';
 import { getColor } from './util';
@@ -24,8 +24,8 @@ const Project = () => {
   useEffect(() => {
     const ac = new AbortController();
     (async () => {
-      mkReqReadme({ repo: data.name, ac }, Repos.singleContentReadme);
-      mkReqLang({ repo: data.name, ac }, Repos.singlelanguages);
+      mkReqReadme({ repo: data.name, ac }, repoAPI.getRepoReadmeContent);
+      mkReqLang({ repo: data.name, ac }, repoAPI.getRepoLanguages);
     })();
 
     return () => ac.abort();

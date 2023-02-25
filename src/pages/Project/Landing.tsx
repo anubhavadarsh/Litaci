@@ -7,7 +7,7 @@ import styles from './Project.module.scss';
 import { usePointerMovement } from './hook';
 import { useAppSelector, useAppDispatch } from 'store/hook';
 import { fetchProjects } from 'store/project/slice';
-import { IRepo } from 'services/api/Repos';
+import { IRepo } from 'services/api/repo';
 import Track from 'components/Track';
 import { ReactComponent as Arrow } from 'assets/icons/arrow-2.svg';
 

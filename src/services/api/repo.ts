@@ -1,29 +1,42 @@
 import { get } from './base';
+const baseURL = import.meta.env.VITE_APP_API_URL;
 
-export const Repos = {
-  index: (signal: AbortSignal) =>
-    get('users/anubhavadarsh/repos', {
+export const repo = {
+  index: (signal: AbortSignal, owner: string = 'anubhavadarsh') =>
+    get(`${baseURL}users/${owner}/repos`, {
       headers: {
         'Content-type': 'application/vnd.github+json',
       },
       signal,
     }),
-  single: (repo: string, signal: AbortSignal) =>
-    get(`repos/anubhavadarsh/${repo}`, {
+  getRepoDetails: (
+    repo: string,
+    signal: AbortSignal,
+    owner: string = 'anubhavadarsh'
+  ) =>
+    get(`${baseURL}repos/${owner}/${repo}`, {
       headers: {
         'Content-type': 'application/vnd.github+json',
       },
       signal,
     }),
-  singlelanguages: (repo: string, signal: AbortSignal) =>
-    get(`repos/anubhavadarsh/${repo}/languages`, {
+  getRepoLanguages: (
+    repo: string,
+    signal: AbortSignal,
+    owner: string = 'anubhavadarsh'
+  ) =>
+    get(`${baseURL}repos/${owner}/${repo}/languages`, {
       headers: {
         'Content-type': 'application/vnd.github+json',
       },
       signal,
     }),
-  singleContentReadme: (repo: string, signal: AbortSignal) =>
-    get(`repos/anubhavadarsh/${repo}/contents/README.md`, {
+  getRepoReadmeContent: (
+    repo: string,
+    signal: AbortSignal,
+    owner: string = 'anubhavadarsh'
+  ) =>
+    get(`${baseURL}repos/${owner}/${repo}/contents/README.md`, {
       headers: {
         Accept: 'application/vnd.github.raw',
         'Content-type': 'application/vnd.github.raw',
