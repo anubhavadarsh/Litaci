@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import Page from 'containers/Page';
 import ProjectLanding from 'pages/Project/Landing';
-import WorkPage from 'pages/Work';
+import WorkLanding from 'pages/Work/Landing';
 import styles from './Home.module.scss';
 import { themeCtx } from 'context/theme-context';
 
@@ -12,7 +12,7 @@ const Home = () => {
     <Page className={styles.wrapper}>
       <Landing />
       <ProjectLanding className={styles.display} />
-      <WorkPage className={styles.display} />
+      <WorkLanding className={styles.display} />
     </Page>
   );
 };
