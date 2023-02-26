@@ -1,4 +1,7 @@
 @import "../../styles/mixins/breakpoints";
+@import "../../styles/mixins/coverLayout";
+
+$u: "https://media.giphy.com/media/IV1oQSR67yUbfklywp/giphy.gif";
 
 .cue {
   display: inline-block;
@@ -34,6 +37,7 @@
   z-index: -1;
   top: 0;
 }
+
 .gallery {
   min-height: 100vh;
   height: auto;
@@ -51,9 +55,6 @@
     flex-grow: 1;
 
     border-bottom: 1px solid var(--color-text);
-    &:last-of-type {
-      border-bottom: none;
-    }
 
     @include media-breakpoint-down(md) {
       border-bottom: none;
@@ -78,6 +79,12 @@
         border-top: 1px solid var(--color-text);
       }
     }
+
+    &:last-of-type {
+      border-bottom: none;
+      border-right: none;
+    }
+
     display: flex;
     article {
       flex: 1;
@@ -89,6 +96,7 @@
       justify-content: center;
       position: relative;
       h3 {
+        text-transform: capitalize;
         font-size: 5vw;
         @include media-breakpoint-down(md) {
           font-size: 2vw;
@@ -101,22 +109,171 @@
         width: 100%;
         height: 100%;
         position: absolute;
-        background: center / contain no-repeat
-            url("https://media.giphy.com/media/WkZ2t3SHy2Zyw/giphy.gif"),
-          black;
+        background: center / cover no-repeat url($u);
         z-index: -1;
       }
 
+      transition: background 0.4s ease-in-out;
+
+      &.bg {
+        background-color: #e0e1dcea;
+        color: var(--color-text);
+
+        &::after {
+          filter: invert(1);
+        }
+
+        &.dark {
+          background-color: #1f1e23ea;
+
+          &::after {
+            filter: none;
+          }
+        }
+      }
+    }
+  }
+}
+//TODO: the stying is repeated in a lot of places like work, and project look into this.
+.workPage {
+  @include cover-layout($u);
+
+  .background {
+    filter: invert(1);
+    &.dark {
+      filter: none;
+    }
+  }
+
+  .banner {
+    h1 {
+      font-size: 8vw;
+    }
+  }
+
+  .contentBox {
+    font-family: var(--font-family-noto-mono-Reg);
+    color: var(--color-text);
+    font-size: 1.2rem;
+    line-height: 1.7rem;
+    @include content;
+
+    > div:first-child {
+      $space-top: 24px;
+      padding: 0 7vmin 8vmin 7vmin;
+      display: flex;
+      flex-direction: column-reverse;
+
       @include media-breakpoint-down(md) {
-        &.bg::after {
-          content: "";
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          background: center / contain no-repeat
-              url("https://media.giphy.com/media/WkZ2t3SHy2Zyw/giphy.gif"),
-            black;
-          z-index: -1;
+        flex-direction: row;
+        padding-top: $space-top;
+        padding-bottom: 0;
+      }
+
+      article {
+        flex-grow: 1;
+        @include media-breakpoint-down(md) {
+          padding: 16px;
+        }
+        padding-top: 24px;
+
+        //TODO:Fix the styling, doesn't really go with the current style; try working with custom components for react markdown
+        .readme {
+          font-size: 16px;
+          line-height: 1.5;
+
+          h1,
+          h2,
+          h3,
+          h4,
+          h5,
+          h6 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            line-height: 1.25;
+            padding-bottom: 0.3em;
+            font-size: 1.5em;
+            border-bottom: 1px solid var(--color-accent-muted);
+          }
+
+          code {
+            padding: 0.2em 0.4em;
+            margin: 0;
+            font-size: 85%;
+            white-space: break-spaces;
+            background-color: var(--color-accent-muted);
+            border-radius: 6px;
+          }
+
+          P {
+            margin-bottom: 16px;
+          }
+
+          pre {
+            margin: 0;
+            margin-bottom: 16px;
+            padding: 16px;
+            overflow: auto;
+            font-size: 85%;
+            line-height: 1.45;
+            background-color: var(--color-accent-muted);
+            border-radius: 6px;
+
+            code {
+              padding: unset;
+              margin: unset;
+              font-size: unset;
+              white-space: unset;
+              background-color: unset;
+              border-radius: unset;
+            }
+          }
+
+          ul {
+            padding-left: 2em;
+            margin-bottom: 16px;
+          }
+
+          a {
+            &:visited {
+              color: #0059b2;
+            }
+          }
+        }
+      }
+
+      aside {
+        top: 0;
+        flex: 0.4;
+        min-width: 300px;
+        @include media-breakpoint-down(md) {
+          position: sticky;
+          min-width: 350px;
+        }
+        height: 100vh;
+
+        > * {
+          padding-top: 24px;
+        }
+        h3 {
+          font-family: var(--font-family-noto-mono-bold);
+          font-size: 24px;
+          text-transform: uppercase;
+          padding-top: 16px;
+        }
+
+        section {
+          h4 {
+            margin-bottom: 5px;
+            text-transform: capitalize;
+          }
+
+          ul {
+            padding-left: 0;
+            li {
+              margin-top: 5px;
+            }
+          }
         }
       }
     }

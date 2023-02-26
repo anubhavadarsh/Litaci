@@ -38,13 +38,11 @@ export const getColor = (seed: string) => {
   return color === undefined ? '#c6538c' : color;
 };
 
-export const extractContentType = (ct: string) => {
+export const extractContentType = (ct: string | null) => {
+  if (Object.is(ct, null)) return null;
+
   const pattern = /(?<=application\/)([\w.-]+)(?=;)/g;
   const match = pattern.exec(ct);
 
-  if (match) {
-    return match[1];
-  }
-
-  return null;
+  return match ? match[1] : null;
 };

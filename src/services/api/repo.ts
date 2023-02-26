@@ -43,6 +43,18 @@ export const repo = {
       },
       signal,
     }),
+  getRepoContent: (
+    repo: string,
+    path: string,
+    signal: AbortSignal,
+    owner: string = 'anubhavadarsh'
+  ) =>
+    get(`${baseURL}repos/${owner}/${repo}/contents/${path}`, {
+      headers: {
+        'Content-type': 'application/vnd.github.object',
+      },
+      signal,
+    }),
 };
 
 export interface IRepoResponse {

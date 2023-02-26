@@ -63,12 +63,14 @@
 
     > div:first-child {
       $space-top: 24px;
-      padding: $space-top 7vmin 0 7vmin;
+      padding: 0 7vmin 8vmin 7vmin;
       display: flex;
       flex-direction: column-reverse;
 
       @include media-breakpoint-down(md) {
         flex-direction: row;
+        padding-top: $space-top;
+        padding-bottom: 0;
       }
 
       article {
