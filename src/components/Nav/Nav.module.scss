@@ -27,15 +27,15 @@
       margin: 6px 5px;
       letter-spacing: 0.5px;
       cursor: pointer;
+      color: var(--color-text);
+      transition: opacity 0.3s ease-in-out;
 
       > * {
-        color: var(--color-text);
+        color: inherit;
+      }
 
-        transition: opacity 0.3s ease-in-out;
-
-        &:hover {
-          opacity: var(--opacity-common);
-        }
+      &:hover {
+        opacity: var(--opacity-common);
       }
 
       & > *.active {
