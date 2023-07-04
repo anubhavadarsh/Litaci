@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import clsx from 'clsx';
+import { motion } from 'framer-motion';
 
 import Page from 'containers/Page';
 import ProjectLanding from 'pages/Project/Landing';
@@ -23,12 +24,33 @@ const Landing = () => {
   return (
     <Page className={styles.home}>
       <div className={clsx(styles.cover, !ctx.dark && styles.bgDark)}>
-        <div className={styles.content}>
-          <h2>Software</h2>
-          <h2>Developer</h2>
-        </div>
+        <AnimatedWord text='software developer' />
       </div>
     </Page>
+  );
+};
+
+const variants = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const AnimatedWord = ({ text }: { text: string }) => {
+  const words = text.split(' ');
+
+  return (
+    <motion.div className={styles.content}>
+      {words.map((w, index) => (
+        <h2 key={index}>{w}</h2>
+      ))}
+    </motion.div>
   );
 };
 
